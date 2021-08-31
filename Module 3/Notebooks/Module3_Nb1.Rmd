@@ -19,7 +19,7 @@ Imagine you've conducted an experiment involving measurements from 20 animals. I
 
 If you throw a single dice 20 times in a row and note down how frequently each face occurs. The result of tallying all counts is a ‘frequency distribution’, which associates each possible outcome with a particular frequency value. Such a distribution is an empirically observed distribution because it is based on a set of 20 actual throws of a dice. Fig (a) below.
 
-![Empirical and theoretical distributions](/Users/lenovo1/Desktop/mtech/courses/stats/Images/fig1.png)
+![Empirical and theoretical distributions](dice rolling probability.png)
 
 But Fig (b) shows a theoretical distribution and represents probability rather than frequency. It depicts how probable is each outcome. In this case, all outcomes are equally probable and therefore it is a ‘uniform’ distribution because the probability is uniformly spread across all possible outcomes. It is furthermore a ‘discrete’ distribution because there are only six particular outcomes and no in-betweens. (Chapter 3, Winter B.)
 
@@ -34,10 +34,7 @@ That's a lot of theory, let's dive into some data now.
 
 ```{r}
 #Change the path according to your PC
-path = "/Users/lenovo1/Desktop/mtech/courses/stats/Datasets/data/"
-fileN ="aflsmall.Rdata"
-file_path = paste(path,fileN, sep = "")
-load(file_path)
+load("aflsmall.Rdata")
 library(lsr)
 who()
 ```
@@ -47,7 +44,7 @@ As you can see there are multiple variables of different class and size.
 Let's take a look at afl.margins variable.
 
 ```{r}
-print (afl.margins)
+print(afl.margins)
 ```
 
 This output doesn’t make it easy to get a sense of what the data is actually saying. Just “looking at the data” isn’t a terribly effective way of understanding data.
@@ -88,11 +85,9 @@ As you've already seen in previous classes, the mean of a set of observations is
 
 Try finding the mean for the first 5 values from afl.margins and then for all the values of afl.margins
 ```{r}
-#Don't forget to uncomment the following before running
-#afl.mean5 = 
-#afl.mean = 
-#afl.mean5
-#afl.mean
+mean(afl.margins)      # average margin
+mean(afl.margins[1:5]) # mean of the margin from the first 5 games
+
 ```
 
 **Median**
@@ -105,15 +100,14 @@ Probably you mentally arranged these numbers in ascending order first and then f
 Now try finding out the median for afl.margins.
 
 ```{r}
-#afl.median = 
-#afl.median
+median(afl.margins)
 ```
 
 **Difference between Mean and Median**
 
 Both of these are measures of central tendency but when to use which can be a bit confusing. In general, the mean is kind of like the “centre of gravity” of the data set, whereas the median is the “middle value” in the data.
 
-![Difference between mean and median](/Users/lenovo1/Desktop/mtech/courses/stats/Images/Fig2.png)
+![Difference between mean and median](pic2.png)
 *Fig 5.2 from Learning Statistics with R by D. Navarro*
 
 **Some key points**
@@ -151,11 +145,13 @@ mean(x = dataset, trim = .1)
 
 So far we've seen how to find the mean and median but what about mode. The **mode** of a sample is very simple: it is the value that occurs most frequently. The core packages in R don’t have a function for calculating the mode. However, the _lsr_ package has a function called modeOf() that does this. 
 
-Try to find out the mode for the variable afl.finalists
+Say, you want to bet your money on the outcome of a match. You may want to find the most likely margin. This is when Mode is useful. Try to find out the mode for the variable afl.margins
 
 ```{r}
 #afl.mode = 
 #afl.mode
+modeOf(x = afl.margins)
+maxFreq(x = afl.margins)
 ```
 
 So far we've just seen the central measures of tendency, but we saw in the beginning that individual variability is quite important in biology. So, let's take a look at some of the measures of variability.
@@ -180,6 +176,7 @@ That is why there is something called the interquartile range (IQR) which is lik
 Try finding out 25%, 75% and 50% quantiles for afl.margins and also the Inter-quartile range.
 ```{r}
 #Use the functions quantile(x = afl.margins, prob = 0.2) for 20% quantile and IQR() 
+
 ```
 
 IQR can simply be thought as the range spanned by the “middle half” of the data.
