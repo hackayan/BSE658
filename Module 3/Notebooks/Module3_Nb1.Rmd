@@ -150,22 +150,32 @@ Say, you want to bet your money on the outcome of a match. You may want to find 
 ```{r}
 #afl.mode = 
 #afl.mode
-modeOf(x = afl.margins)
-maxFreq(x = afl.margins)
+modeOf(afl.margins)
+maxFreq(afl.margins)
 ```
 
 So far we've just seen the central measures of tendency, but we saw in the beginning that individual variability is quite important in biology. So, let's take a look at some of the measures of variability.
+
+
+
+```{r}
+mean(afl.margins)
+```
 
 ##### Measures of variability
 
 This refers to how “spread out” are the data? How “far” away from the mean or median do the observed values tend to be?
 
+
+```{r}
+plot(afl.margins)
+```
 **Range**
 
 The range of a variable is very simple: it’s the biggest value minus the smallest value. Try to find out the range of afl.margins using the `range()` function.
 
 ```{r}
-#Find range of afl.margins here
+#Find range of afl.margins here using the range function
 ```
 
 But what about the earlier data we saw, ` -100,2,3,4,5,6,7,8,9,10`. Without removing the outlier, we'll get a range of 110 but without the outlier, we'll get a range of only 8.
@@ -175,15 +185,25 @@ That is why there is something called the interquartile range (IQR) which is lik
 
 Try finding out 25%, 75% and 50% quantiles for afl.margins and also the Inter-quartile range.
 ```{r}
-#Use the functions quantile(x = afl.margins, prob = 0.2) for 20% quantile and IQR() 
+#Use the functions quantile(x = afl.margins, prob = 0.25) for 25% quantile and IQR() 
+quantile(x = afl.margins, prob = 0.2)
 
 ```
 
 IQR can simply be thought as the range spanned by the “middle half” of the data.
 
+
+```{r}
+quantile( x = afl.margins, probs = c(.25,.75) )
+# try using IQR() here
+
+```
+
+
 **Variance**
 
 In order to find out the variance of data from the mean or median, we need to find the deviation such that abs (X~i~ - $\overline{X}$). ($\overline{X}$ is the mean of dataset). Mathematically, squared deviations are preferred over absolute deviations, and if we take the mean of all the squared deviations, we'll get the **variance** of the data. 
+
 
 Try finding out the variance using `var()`.
 
@@ -193,6 +213,9 @@ Try finding out the variance using `var()`.
 
 _Read more about var() function and absolute vs squared deviations in Section 5.2.4 from Learning Statistics with R by D. Navarro_
 
+Also note that the division is by N-1 for variance for a sample! Why is that not N? 
+This we will discuss later. 
+
 **Standard Deviation**
 
 But what does this variance signify? It is very difficult to interpret the squared value and therefore, we take the _root mean square deviation_ for interpreting the spread of data points. This is called _Standard Deviation_ and is calculated by taking the square root of variance mathematically, and using the sd() function in R base package.
@@ -200,7 +223,7 @@ But what does this variance signify? It is very difficult to interpret the squar
 Try to find out the standard deviation of afl.margins.
 
 ```{r}
-#Find out Std dev. here
+#Find out Std dev. here using sd()
 ```
 
 ##### Quick cheat sheet: When to use what?
@@ -221,18 +244,58 @@ Try to find out the standard deviation of afl.margins.
   - Square root of the variance
   - Fairly elegant mathematically, and can be interpreted pretty well
   - Complements mean and is the most popular measure of variation
+  
+  
+##### Derivation for deviation based variance estimates 
+Mean absolute deviation; Variance; SD
+ 
+Say, the sample is sample = [20,30,40]; 
+the mean of the sample is then 30
 
+The deviation of each sample data point from the mean is:
+deviation = [20-30, 30-30, 40-30];
+          = [-10, 0, 10]
+
+absolute deviation = [10,0,10] 
+mean of absolute deviation = (10+0+10)/3 
+
+square of the deviation = [-10^2, 0^2, 10^2];
+mean of the squared deviations = variance = (100+0+100)/3
+
+root of mean squared deviation = standard deviation = sqrt(variance)
+
+
+##### Bessel's correction
+While calculating variance and standard deviation of the sample, we are always
+trying to estimate the variance and standard deviation of the population. 
+
+Remember the heights of students example! 
+
+Now since the sample variance and standard deviation is biased and less than
+that of the population, we divide by N-1 instead of N to inflate the estimates.
+
+So the variance after Bessel's correction should be 
+mean of the squared deviations = variance = (100+0+100)/(3-1)
+
+  
+##### Summary function
 Now that we've learnt about the different methods of describing a data, it would've been awesome if R could summarize all of this for us together, right? 
 
 There's indeed a function called `summary()` in R.
 
 ```{r}
 #Check out what summary() does for afl.margins
+summary(afl.margins)
+
 ```
 
 Pretty cool, no?
 
 Also try it out for other kinds of variables like `afl.finalists` or `as.character(afl.finalists)`
+
+
+
+##### Summarizing dataframes 
 
 Let's try out summarizing a dataframe as well.
 
