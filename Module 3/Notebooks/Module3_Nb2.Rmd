@@ -65,8 +65,6 @@ _Reference: Chapter 5, Winter B._
 So far we have focused entirely on how to construct descriptive statistics for a single variable. We haven’t talked about how to describe the relationships between variables in the data. To do that, we want to talk mostly about the correlation between variables.
 
 ```{r}
-setwd("/Users/lenovo1/Desktop/mtech/courses/stats/Datasets/data/")
-
 #Let's load some data
 load( "parenthood.Rdata" )
 who(TRUE)
@@ -132,7 +130,7 @@ The correlation coefficient (or Pearson's correlation coefficient) between two v
 
 Look at the plots for different _r_ values:
 
-![Correlation plots](/Users/lenovo1/Desktop/mtech/courses/stats/Images/fig4.png)
+![Correlation plots](fig 4.png)
 
 ##### Covariance
 
@@ -170,7 +168,7 @@ What did you find?
 
 It really depends on what you want to use the data for, and on how strong the correlations in your field tend to be.
 
-![Correlation coefficient interpretation table](/Users/lenovo1/Desktop/mtech/courses/stats/Images/fig5.png)
+![Correlation coefficient interpretation table](fig 5.png)
  
 Now let's take a look at this data called "Anscombe's Quartet"
  
@@ -187,7 +185,12 @@ Were the correlation coefficients same?
 Now try plotting them.
 
 ```{r}
-scatterplot()
+scatterplot(x = X1, y = Y1,regLine = FALSE, smooth = FALSE)
+scatterplot(x = X2, y = Y2,regLine = FALSE, smooth = FALSE)
+scatterplot(x = X3, y = Y3,regLine = FALSE, smooth = FALSE)
+scatterplot(x = X4, y = Y4,regLine = FALSE, smooth = FALSE)
+
+
 ```
 
 Therefore, remember to always look at the scatterplot before attaching any interpretation to the data!
@@ -199,7 +202,6 @@ If we have to properly define the role of Pearson's coefficient, we can say that
 But let's take a look at another dataset and find correlation between its variables.
 
 ```{r}
-setwd("/Users/lenovo1/Desktop/mtech/courses/stats/Datasets/data/")
 load( "effort.Rdata" )
 effort
 cor( effort$hours, effort$grade )
@@ -229,6 +231,10 @@ Now the correlation coefficient we get is different from the Perason's correlati
 #Execute this and compare with the correlation coefficient we got above
 cor( effort$hours, effort$grade, method = "spearman")
 ```
+
+##### the correlate() function
+Try using this function to find the relationship between several variables in a dataframe at once.
+
 
 ##### Handling missing values
 
