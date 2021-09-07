@@ -58,6 +58,22 @@ X =
 z = (X - mean(X)) / sd(X)
 ```
 
+Using scale() to center and normalize
+```{r}
+load("aflsmall.Rdata")
+afl.margins_c <- scale(afl.margins, scale = FALSE)
+afl.margins_z <- scale(afl.margins)
+```
+
+Plotting the histogram
+```{r}
+hist(afl.margins)
+hist(afl.margins_c)
+hist(afl.margins_z)
+```
+
+
+
 _Reference: Chapter 5, Winter B._
 
 #### Correlation
