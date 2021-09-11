@@ -91,6 +91,8 @@ _Reference: Chapter 2, Whitlock and Schluter_
 To examine data for single variable, we show its frequency distribution. The _frequency distribution_ of a variable is the number of occurrences of all values in the data.
 
 ```{r}
+#Let's load aflsmall.Rdata
+load("aflsmall.Rdata")
 #Here's a frequency table for afl.finalists
 table(afl.finalists)
 ```
