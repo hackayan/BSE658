@@ -19,6 +19,20 @@ Probability theory is a branch of mathematics that tells you how often different
 
 In each case the “truth of the world” is known. We know that the coin is fair, so there’s a 50% chance that any individual coin flip will come up heads. We know that the lottery follows specific rules. The critical point is that probabilistic questions start with a known model of the world, and we use that model to do some calculations. *[Chapter 9, Navarro D.]*
 
+Probability of heads when you toss a coin? 
+P(H) = 0.5 
+
+Frequentist view is also an objective view. 
+Coin - [H, T, H, T, H, T, H]
+Prob - [1, 1/2, 2/3, 0.5, ... ]
+
+
+
+
+
+Coin - [1, 1, 1, 1, 0]
+P'(H) - 0.7
+
 - - - -
 **A short note on Models**
 
@@ -104,14 +118,18 @@ If any of these elementary events occurs, then E is also said to have occurred. 
 
 *Refer to section 9.4.1, Navarro D., for the detailed example*
 
-Some basic terminology - We’ll let `N` denote the number of dice rolls in our experiment; which is often referred to as the `size parameter` of our binomial distribution. We’ll also use `θ` to refer to the the probability that a single die comes up skulls, a quantity that is usually called the `success probability` of the binomial. Finally, we’ll use `X` to refer to the results of our experiment, namely the number of skulls I get when I roll the dice. Since the actual value of X is due to chance, we refer to it as a `random variable`.
+Some basic terminology - We’ll let `N` denote the number of dice rolls in our experiment; which is often referred to as the `size parameter` of our binomial distribution. We’ll also use `θ` to refer to the the probability that a single die comes up skull, a quantity that is usually called the `success probability` of the binomial. Finally, we’ll use `X` to refer to the results of our experiment, namely the number of skulls I get when I roll the dice. Since the actual value of X is due to chance, we refer to it as a `random variable`.
 
 `X ~ Binomial(θ, N)` denotes X is generated randomly from a binomial distribution with parameters θ and N.
+
+4 ~ Binomial(1/6, 20)
+
+5 ~ Binomial(1/2, 10)
 
 Let's generate a binomial distribution in R:
 
 ```{r}
-dbinom( x = 4, size = 20, prob = 1/6 )
+dbinom( x = 1, size = 20, prob = 1/6)
 ```
 The above command calculates the probability of getting x = 4 skulls, from an experiment of size = 20 trials, in which the probability of getting a skull on any one trial is prob = 1/6.
 
@@ -126,7 +144,7 @@ If we want to find the probability of obtaining an outcome smaller than or equal
 
 ```{r}
 #Find the probability of rolling 0 skulls or 1 skull or 2 skulls or 3 skulls or 4 skulls
-pbinom( q= 4, size = 20, prob = 1/6)
+pbinom( q= 3, size = 20, prob = 1/6)
 
 #Practice - Find probability of getting 0-5 heads in 50 trials of coin flip
 ```
@@ -135,7 +153,7 @@ In other words, value of 4 is actually the 76.9th percentile of this binomial di
 Now let’s say we want to calculate the 75th percentile of the binomial distribution.
 
 ```{r}
-qbinom( p = 0.75, size = 20, prob = 1/6 )
+qbinom( p = 0.566, size = 20, prob = 1/6 )
 
 #Practice - Find the 40th percentile
 ```
@@ -152,6 +170,95 @@ hist(z, col = 'steelblue')
 
 All these different functions *d, p, q, n* are also applicable to other distributions. E.g. *dnorm, pnorm, qnorm, rnorm* for Normal distribution. 
 
-End of part 1
+
+##### Normal Distribution
+
+Most frequently encountered distribution.
+Eg: heights of all students in the class, marks obtained in exams, etc
+
+Basically, whenever you have accumulation of data at the center, fewer extreme values and a near symmetric spread, you should recall the normal distribution.
+
+
+
+```{r}
+normal_distribution <- rnorm(10000, mean = 0, sd = 1) 
+histogram_normal_distribution <- hist(normal_distribution)
+plot(histogram_normal_distribution$mids,histogram_normal_distribution$density)
+
+```
+
+Note: Normal distribution is sometimes referred to as the bell curve or Gaussian distribution
+
+The notation for a normal distribution is: X ∼ Normal(μ,σ) 
+
+
+dnorm tells you the probability of getting a particular outcome
+```{r}
+dnorm(x=0, mean=0, sd=1)
+
+```
+Cumulative normal distribution
+```{r}
+pnorm(2, mean = 0, sd = 1)
+```
+
+```{r}
+qnorm(0.5 ,mean = , sd = 1)
+```
+
+##### Other useful distributions
+
+Some other distributions you may encounter include:
+*1) t distribution*
+
+Looks like the normal distribution but has heavier tails. 
+Used when data looks like a normal distribution but the mean and SD are unknown.
+
+Use the following functions to visualize the t distribution: 
+dt(), pt(), qt() and rt()
+
+```{r}
+t_distribution <- rt(10000, 3)
+histogram_t_distribution <- hist(t_distribution)
+plot(histogram_t_distribution$mids,histogram_t_distribution$density)
+```
+
+
+
+
+*2) Chi square (χ2) distribution*
+
+All positive and heavily skewed to the left.  
+Used when data represents sum of squares of a normally distributed variables.
+
+Use the following functions to visualize the chi sq distribution: 
+dchisq(), pchisq(), qchisq(), rchisq().
+
+```{r}
+chisq_distribution <- rchisq(10000, 3, ncp = 0)
+histogram_chisq_distribution <- hist(chisq_distribution)
+plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density)
+```
+
+
+
+
+3) F distribution
+
+This one looka a bit like the chi square distribution. But this distribution comes into picture when 
+one compares two chi sq distributions.
+
+Use the following functions to visualize the chi sq distribution: 
+df(), pf(), qf() and rf()
+
+```{r}
+f_distribution <- rf(10000, 3, 5)
+histogram_f_distribution <- hist(f_distribution)
+plot(histogram_f_distribution$mids,histogram_f_distribution$density)
+```
+
+
+
+The End
 
 Reference - *Chapter 9, Navarro D.*
