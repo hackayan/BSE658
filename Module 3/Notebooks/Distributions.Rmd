@@ -3,6 +3,13 @@ title: "Inferential Statistics: Probability & Distributions - 1"
 output: html_notebook
 ---
 
+
+You: made a change
+I: added a new command
+You: want to sync the new command
+
+### Follow this carefully
+
 So far we have discussed about descriptive statistics - summarizing data and plotting it. But in order gain the power of making inferences, we will be strating with inferential statistics.
 
 #### Pre-requisite: Probability
@@ -104,7 +111,7 @@ Some basic terminology - We’ll let `N` denote the number of dice rolls in our 
 Let's generate a binomial distribution in R:
 
 ```{r}
-dbinom( n = 4, size = 20, prob = 1/6 )
+dbinom( x = 4, size = 20, prob = 1/6 )
 ```
 The above command calculates the probability of getting x = 4 skulls, from an experiment of size = 20 trials, in which the probability of getting a skull on any one trial is prob = 1/6.
 
