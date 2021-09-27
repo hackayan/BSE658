@@ -139,7 +139,7 @@ qbinom( p = 0.566, size = 20, prob = 1/6 )
 We've found different quantities. What if we want to simulate the above experiments. We specify how many times R should “simulate” the experiment using the n argument, and it will generate random outcomes from the binomial distribution using the `rbinom` function.
 
 ```{r}
-z <- rbinom( n = 100, size = 20, prob = 1/6 )
+z <- rbinom( n = 10000, size = 20, prob = 2/6 )
 z
 #Let's also plot this and see how it looks
 hist(z, col = 'steelblue')
@@ -163,7 +163,7 @@ Basically, whenever you have accumulation of data at the center, fewer extreme v
 - `rnorm()` - For random number generation
 
 
-
+mean = 0; sd = 1 -> standard normal distribution
 ```{r}
 normal_distribution <- rnorm(10000, mean = 0, sd = 1) 
 histogram_normal_distribution <- hist(normal_distribution)
@@ -179,21 +179,21 @@ The notation for a normal distribution is: X ∼ Normal(μ,σ)
 
 dnorm tells you the probability of getting a particular outcome
 ```{r}
-dnorm(x=0, mean=0, sd=1)
+dnorm(x=85, mean=80, sd=5)
 
 ```
 Cumulative normal distribution
 ```{r}
-pnorm(2, mean = 0, sd = 1)
+pnorm(q = 80, mean = 80, sd = 5)
 ```
 
 ```{r}
-qnorm(0.5 ,mean = , sd = 1)
+qnorm(0.25 ,mean = 0 , sd = 1)
 ```
 
 *Checking for normality using the Shapiro-Wilk Test*
 ```{r}
-norm <- rnorm(500, mean = 0, sd = 1) 
+norm <- rnorm(50, mean = 0, sd = 1) 
 shapiro.test(norm)
 
 binom <- rbinom(100, 20, 1/6)
@@ -217,7 +217,7 @@ Use the following functions to visualize the t distribution:
 dt(), pt(), qt() and rt()
 
 ```{r}
-t_distribution <- rt(10000, 8)
+t_distribution <- rt(10000, 3)
 histogram_t_distribution <- hist(t_distribution)
 plot(histogram_t_distribution$mids,histogram_t_distribution$density, type="l", col="blue", lwd=3)
 ```
@@ -234,7 +234,12 @@ Use the following functions to visualize the chi sq distribution:
 dchisq(), pchisq(), qchisq(), rchisq().
 
 ```{r}
-chisq_distribution <- rchisq(10000, 3, ncp = 0)
+
+norm1 <- rnorm(100, mean = 10, sd = 5)
+norm2 <- rnorm(100, mean = 20, sd = 7)
+chisqdist <- norm1^2 + norm2^2
+
+chisq_distribution <- rchisq(10000, 3)
 histogram_chisq_distribution <- hist(chisq_distribution)
 plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density, type="l", col="blue", lwd=3)
 ```
@@ -244,7 +249,7 @@ plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density, typ
 
 3) F distribution
 
-This one looka a bit like the chi square distribution. But this distribution comes into picture when 
+This one looks a bit like the chi square distribution. But this distribution comes into picture when 
 one compares two chi sq distributions.
 
 Use the following functions to visualize the chi sq distribution: 
