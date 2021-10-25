@@ -1,0 +1,84 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+ESP example:
+
+Out of 100, 62 individuals correctly predicted the card on their forehead. 
+
+Null hypothesis: p =  0.5
+n = 100
+
+
+
+*Null hypothesis*
+```{r}
+r <- rbinom(n = 10000, size = 100, prob = 0.5)
+hist(r)
+```
+
+
+
+How many people have scored above 60?
+```{r}
+pbinom(q = 63, size = 100,prob = 0.5,lower.tail = FALSE)
+```
+
+
+How many have scored below 40? 
+
+```{r}
+pbinom(q = 36, size = 100,prob = 0.5)
+
+```
+Overall including those below 40 and above 59, we have 0.028+0.028 = 0.056 or ~ 5.6% of the individuals.
+
+That means under the 5% type-1 error criterion, as long as the number of individuals is between 40 and 59, we still cannot reject the Null hypothesis.
+
+But at 62, we can! 
+
+
+How can we directly test this? 
+*Binomial Test in R*
+
+```{r}
+binom.test( x=62, n=100, p=.5 )
+
+
+
+```
+
+*Power Analysis in R*
+
+
+```{r}
+library(pwr)
+pwr.p.test(h = ES.h(p1 = 0.75, p2 = 0.5),
+           sig.level = 0.05,
+           power = 0.80,
+           alternative = "greater")
+```
+```{r}
+pwr.p.test(n = 100,
+           sig.level = 0.001,
+           power = 0.80,
+           alternative = "greater")
+```
+
+```{r}
+ES.h(p1 = 0.95, p2 = 0.5)
+```
+git config user.email "arjunr@iitk.ac.in"
+git config user.name "Arjun"
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
