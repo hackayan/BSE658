@@ -61,6 +61,27 @@ As you can see, different margins in a sample will have different measurements. 
 
 Therefore, here we have plotted a histogram for the afl.margins variable which gives the frequency distribution of the different margin values.
 
+Now let's try this using GGPLOT, shall we?!
+```{r}
+library(ggplot2)
+```
+
+```{r}
+df <- data.frame(afl.margins)
+```
+
+
+```{r}
+ggplot(df, aes(x = afl.margins)) + geom_histogram(bins=12)
+```
+
+```{r}
+# Basic histogram
+ggplot(df, aes(x = afl.margins)) + geom_histogram(bins=25,color="gray", fill="gray")
+```
+Note: if you want to learn more about plotting histograms check this out: http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization
+
+
 **Skewness**
 
 If you observe the graph, you will find that it is not entirely symmetrical. A measure of such asymmetry is called **Skewness**. If the data tend to have a lot of extreme small values (i.e., the lower tail is “longer” than the upper tail) and not so many extremely large values (left panel), then we say that the data are _negatively skewed_. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are _positively skewed_.
@@ -170,12 +191,27 @@ This refers to how “spread out” are the data? How “far” away from the me
 ```{r}
 plot(afl.margins)
 ```
+Again, do you what to try this using GGPLOT? Let's give it a shot!
+```{r}
+library(dplyr)
+df <- mutate(df, numgames= 1:length(afl.margins))
+```
+
+
+
+```{r}
+ggplot(df, aes(y = afl.margins, x = numgames)) + geom_point()
+```
+
+
+
 **Range**
 
 The range of a variable is very simple: it’s the biggest value minus the smallest value. Try to find out the range of afl.margins using the `range()` function.
 
 ```{r}
 #Find range of afl.margins here using the range function
+range(afl.margins)
 ```
 
 But what about the earlier data we saw, ` -100,2,3,4,5,6,7,8,9,10`. Without removing the outlier, we'll get a range of 110 but without the outlier, we'll get a range of only 8.
@@ -185,8 +221,8 @@ That is why there is something called the interquartile range (IQR) which is lik
 
 Try finding out 25%, 75% and 50% quantiles for afl.margins and also the Inter-quartile range.
 ```{r}
-#Use the functions quantile(x = afl.margins, prob = 0.25) for 25% quantile and IQR() 
-quantile(x = afl.margins, prob = 0.2)
+#Use the functions quantile(x = afl.margins, prob = 0.25) for 25% quantile
+quantile(x = afl.margins, prob = 0.25)
 
 ```
 
@@ -209,6 +245,7 @@ Try finding out the variance using `var()`.
 
 ```{r}
 #Use var() for finding variance of afl.margins
+var(afl.margins)
 ```
 
 _Read more about var() function and absolute vs squared deviations in Section 5.2.4 from Learning Statistics with R by D. Navarro_
@@ -224,6 +261,7 @@ Try to find out the standard deviation of afl.margins.
 
 ```{r}
 #Find out Std dev. here using sd()
+
 ```
 
 ##### Quick cheat sheet: When to use what?
