@@ -331,15 +331,39 @@ Pretty cool, no?
 
 Also try it out for other kinds of variables like `afl.finalists` or `as.character(afl.finalists)`
 
+```{r}
+ggplot(df, aes(x=afl.margins, )) + 
+  geom_boxplot()+ coord_flip()
+```
 
 
-##### Summarizing dataframes 
 
-Let's try out summarizing a dataframe as well.
+##### Summary function
+
+If the Object is a numeric
+```{r}
+summary(object = afl.margins)
+```
+
+```{r}
+blowouts <-  afl.margins > 50
+blowouts
+```
+```{r}
+summary (object = blowouts)
+```
+
+
+Now let's try out summarizing a dataframe as well.
+
 
 ```{r}
 load("clinicaltrial.Rdata")
 #Check the name of the variable in the environment which contains the dataframe and try summarizing it
+```
+
+```{r}
+summary(clin.trial)
 ```
 
 The `psych` package also has a function called `describe()` for dataframes. Don't forget to check it out too!
@@ -365,9 +389,7 @@ by(data=clin.trial, INDICES=clin.trial$therapy, FUN=describe)
 What if you have multiple grouping variables? Suppose, for example, you would like to look at the average mood gain separately for all possible combinations of drug and therapy.We can use `aggregate()` command.
 
 ```{r}
-aggregate( formula = mood.gain ~ drug + therapy, 
-           data = clin.trial,
-           FUN = mean) 
+aggregate( mood.gain ~ drug + therapy, data = clin.trial,FUN = mean) 
 #1 mood.gain by drug/therapy combination
 #2 data is in the clin.trial data frame
 #3 print out group means
