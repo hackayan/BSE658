@@ -123,8 +123,21 @@ scatterplot( dan.grump ~ dan.sleep, data = parenthood, regLine = FALSE, smooth =
 scatterplot
 ```
 
+
+```{r}
+library(ggplot2)
+# Basic scatter plot
+ggplot(parenthood, aes(x = dan.sleep, y = dan.grump)) + geom_point() + geom_point() + geom_smooth()
+```
+
+
+
+
+
 ```{r}
 #Plot a scatter plot for baby.sleep and dan.grump variables
+ggplot(parenthood, aes(x = baby.sleep, y = dan.grump)) + geom_point()
+
 ```
 
 
@@ -185,7 +198,43 @@ What did you find?
 It really depends on what you want to use the data for, and on how strong the correlations in your field tend to be.
 
 ![Correlation coefficient interpretation table](fig 5.png)
- 
+
+Let's make some correlation plots using ggcorrplot library 
+```{r}
+install.packages("ggcorrplot")
+```
+
+
+```{r}
+library(ggcorrplot)
+```
+
+```{r}
+corr <- round(cor(parenthood), 1)
+corr
+```
+```{r}
+p.mat <- cor_pmat(parenthood)
+p.mat
+```
+
+```{r}
+ggcorrplot(corr)
+```
+
+```{r}
+ggcorrplot(corr, method = "circle")
+```
+
+
+```{r}
+ggcorrplot(corr, hc.order = TRUE, type = "lower",
+   lab = TRUE)
+```
+For more such options refer:
+http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2
+
+
 Now let's take a look at this data called "Anscombe's Quartet"
  
 ```{r}
@@ -229,7 +278,7 @@ If you plot this -
 scatterplot(effort$hours, effort$grade, regLine = TRUE, smooth = FALSE)
 ```
 
-The correlation _r_ = 0.91 we get above doe snot represent the actual relationship the plot is depicting. What we’re looking for is something that captures the fact that there is a perfect **ordinal relationship** here. That is, if student 1 works more hours than student 2, then we can guarantee that student 1 will get the better grade.
+The correlation _r_ = 0.91 we get above does not represent the actual relationship the plot is depicting. What we’re looking for is something that captures the fact that there is a perfect **ordinal relationship** here. That is, if student 1 works more hours than student 2, then we can guarantee that student 1 will get the better grade.
 
 If we’re looking for ordinal relationships, all we have to do is treat the data as if it were ordinal scale! So, instead of measuring effort in terms of “hours worked”, let's rank all 10 of the students in order of hours worked. That is, student 1 did the least work out of anyone (2 hours) so they get the lowest rank (rank = 1). Student 4 was the next laziest, putting in only 6 hours of work in over the whole semester, so they get the next lowest rank (rank = 2).
 
@@ -249,7 +298,22 @@ cor( effort$hours, effort$grade, method = "spearman")
 ```
 
 ##### the correlate() function
-Try using this function to find the relationship between several variables in a dataframe at once.
+Try using this function to find the relationship between several variables in a dataframe at once even if some of them are not numeric!
+
+```{r}
+load("work.Rdata")
+head(work)
+```
+```{r}
+cor(work)
+```
+```{r}
+correlate(work)
+```
+Or if you want to use the Spearman method
+```{r}
+correlate( work, corr.method="spearman" )
+```
 
 
 ##### Handling missing values
@@ -263,7 +327,7 @@ Let's look at such a dataset.
 ```{r}
 load( "parenthood2.Rdata" )
 print( parenthood2 )
-describe( parenthood2 ) 
+head(parenthood2)
 #Check how many missing values are there for each variable - compare the values in 'n' with the number of days.
 ```
 
