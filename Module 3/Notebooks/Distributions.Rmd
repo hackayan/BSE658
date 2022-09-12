@@ -139,12 +139,32 @@ qbinom( p = 0.566, size = 20, prob = 1/6 )
 We've found different quantities. What if we want to simulate the above experiments. We specify how many times R should “simulate” the experiment using the n argument, and it will generate random outcomes from the binomial distribution using the `rbinom` function.
 
 ```{r}
-z <- rbinom( n = 10000, size = 20, prob = 2/6 )
-z
+z <- rbinom( n = 1000, size = 20, prob = 1/2 )
 #Let's also plot this and see how it looks
-hist(z, col = 'steelblue')
+hist(z, breaks=15, col = 'steelblue')
 ```
 #Try plotting the distributions in above examples and vary the size, trial number and probability to generate different plots.
+```{r}
+library(ggplot2)
+df<- data.frame(z)
+# Basic histogram with custom binwidth
+ggplot(df, aes(x=z)) + geom_histogram(aes(y = ..density..), binwidth=1, color="darkblue", fill="lightblue")
+```
+
+```{r}
+dbinom(x = 10, size = 20, prob = 1/2)
+```
+```{r}
+pbinom(q = 10, size = 20, prob = 1/2)
+```
+```{r}
+qbinom(p = 0.95, size = 20, prob = 1/2)
+```
+
+
+
+
+
 
 All these different functions *d, p, q, n* are also applicable to other distributions. E.g. *dnorm, pnorm, qnorm, rnorm* for Normal distribution. 
 
@@ -165,9 +185,9 @@ Basically, whenever you have accumulation of data at the center, fewer extreme v
 
 mean = 0; sd = 1 -> standard normal distribution
 ```{r}
-normal_distribution <- rnorm(10000, mean = 0, sd = 1) 
+normal_distribution <- rnorm(10000, mean = 10, sd = 5) 
 histogram_normal_distribution <- hist(normal_distribution)
-plot(histogram_normal_distribution$mids,histogram_normal_distribution$density, type="l", col="blue", lwd=3)
+plot(histogram_normal_distribution$mids,histogram_normal_distribution$density, type="l", col="blue", lwd=1)
 
 
 ```
@@ -217,7 +237,7 @@ Use the following functions to visualize the t distribution:
 dt(), pt(), qt() and rt()
 
 ```{r}
-t_distribution <- rt(10000, 3)
+t_distribution <- rt(10000, 15)
 histogram_t_distribution <- hist(t_distribution)
 plot(histogram_t_distribution$mids,histogram_t_distribution$density, type="l", col="blue", lwd=3)
 ```
