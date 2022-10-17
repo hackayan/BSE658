@@ -81,6 +81,26 @@ head( chico )
 oneSampleTTest( chico$improvement, mu=0 )
 ```
 ```{r}
-wilcox.test( x = chico$improvement, mu=0)
+qqnorm( y = chico$improvement )        # draw the QQ plot
+```
+
+```{r}
+shapiro.test( x = chico$improvement )
+```
+
+```{r}
+improvement2 <- rchisq(100, 2) 
+hist(x = improvement2)
+```
+```{r}
+qqnorm( y = improvement2 ) 
+```
+```{r}
+shapiro.test( x = improvement2 )
+```
+
+
+```{r}
+wilcox.test( x = improvement2, mu=0)
 ```
 
