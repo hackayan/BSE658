@@ -44,10 +44,19 @@ independentSamplesTTest(
   )
 ```
 ```{r}
+library(car)
+```
+
+
+```{r}
 independentSamplesTTest( 
       formula = grade ~ tutor,  # formula specifying outcome and group variables
       data = harpo              # data frame that contains the variables
   )
+```
+```{r}
+leveneTest(grade ~ tutor,  # formula specifying outcome and group variables
+      data = harpo)              # data frame that contains the variables)
 ```
 
 
