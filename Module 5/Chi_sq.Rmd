@@ -113,8 +113,35 @@ associationTest( formula = ~choice+species, data = chapek9 )
 
 ```{r}
 cramersV( chapekFrequencies )
+
 ```
+
+
+
+
 ```{r}
 chisq.test( chapekFrequencies )
+```
+
+
+Fisher Exact test: when observed frequencies are less than 5 
+80% of the time in larger datasets
+
+```{r}
+load( file.path( "salem.Rdata" ))
+```
+
+
+```{r}
+salem.tabs <- table( trial )
+print( salem.tabs )
+```
+
+```{r}
+chisq.test( salem.tabs )
+```
+
+```{r}
+fisher.test( salem.tabs )
 ```
 

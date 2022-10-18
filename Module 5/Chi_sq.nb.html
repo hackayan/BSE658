@@ -2137,6 +2137,8 @@ Other information:
 <pre><code>[1] 0.244058</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggY2hhcGVrRnJlcXVlbmNpZXMgKVxuYGBgIn0= -->
 <pre class="r"><code>chisq.test( chapekFrequencies )</code></pre>
@@ -2150,9 +2152,69 @@ X-squared = 10.722, df = 2, p-value = 0.004697</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Fisher Exact test: when observed frequencies are less than 5 80% of
+the time in larger datasets</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9hZCggZmlsZS5wYXRoKCBcInNhbGVtLlJkYXRhXCIgKSlcbmBgYCJ9 -->
+<pre class="r"><code>load( file.path( &quot;salem.Rdata&quot; ))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2FsZW0udGFicyA8LSB0YWJsZSggdHJpYWwgKVxucHJpbnQoIHNhbGVtLnRhYnMgKVxuYGBgIn0= -->
+<pre class="r"><code>salem.tabs &lt;- table( trial )
+print( salem.tabs )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIG9uLmZpcmVcbmhhcHB5ICAgRkFMU0UgVFJVRVxuICBGQUxTRSAgICAgMyAgICAzXG4gIFRSVUUgICAgIDEwICAgIDBcbiJ9 -->
+<pre><code>       on.fire
+happy   FALSE TRUE
+  FALSE     3    3
+  TRUE     10    0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggc2FsZW0udGFicyApXG5gYGAifQ== -->
+<pre class="r"><code>chisq.test( salem.tabs )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogQ2hpLXNxdWFyZWQgYXBwcm94aW1hdGlvbiBtYXkgYmUgaW5jb3JyZWN0XG4ifQ== -->
+<pre><code>Warning: Chi-squared approximation may be incorrect</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFBlYXJzb24ncyBDaGktc3F1YXJlZCB0ZXN0IHdpdGggWWF0ZXMnIGNvbnRpbnVpdHkgY29ycmVjdGlvblxuXG5kYXRhOiAgc2FsZW0udGFic1xuWC1zcXVhcmVkID0gMy4zMDk0LCBkZiA9IDEsIHAtdmFsdWUgPSAwLjA2ODg4XG4ifQ== -->
+<pre><code>
+    Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+
+data:  salem.tabs
+X-squared = 3.3094, df = 1, p-value = 0.06888</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlzaGVyLnRlc3QoIHNhbGVtLnRhYnMgKVxuYGBgIn0= -->
+<pre class="r"><code>fisher.test( salem.tabs )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdEZpc2hlcidzIEV4YWN0IFRlc3QgZm9yIENvdW50IERhdGFcblxuZGF0YTogIHNhbGVtLnRhYnNcbnAtdmFsdWUgPSAwLjAzNTcxXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG9kZHMgcmF0aW8gaXMgbm90IGVxdWFsIHRvIDFcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjAwMDAwMCAxLjIwMjkxM1xuc2FtcGxlIGVzdGltYXRlczpcbm9kZHMgcmF0aW8gXG4gICAgICAgICAwIFxuIn0= -->
+<pre><code>
+    Fisher&#39;s Exact Test for Count Data
+
+data:  salem.tabs
+p-value = 0.03571
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.000000 1.202913
+sample estimates:
+odds ratio 
+         0 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KbGlicmFyeSggbHNyICkNCmxvYWQoIGZpbGUucGF0aCgicmFuZG9tbmVzcy5SZGF0YSIgKSkNCnN0cihjYXJkcykNCmBgYA0KYGBge3J9DQpvYnNlcnZlZCA8LSB0YWJsZSggY2FyZHMkY2hvaWNlXzEgKQ0Kb2JzZXJ2ZWQNCmBgYA0KDQpgYGB7cn0NCnByb2JhYmlsaXRpZXMgPC0gYyhjbHVicyA9IC4yNSwgZGlhbW9uZHMgPSAuMjUsIGhlYXJ0cyA9IC4yNSwgc3BhZGVzID0gLjI1KSANCnByb2JhYmlsaXRpZXMNCmBgYA0KDQpgYGB7cn0NCk4gPC0gMjAwICAjIHNhbXBsZSBzaXplDQpleHBlY3RlZCA8LSBOICogcHJvYmFiaWxpdGllcyAjIGV4cGVjdGVkIGZyZXF1ZW5jaWVzDQpleHBlY3RlZA0KYGBgDQoNCmBgYHtyfQ0Kb2JzZXJ2ZWQgLSBleHBlY3RlZCANCmBgYA0KDQpgYGB7cn0NCihvYnNlcnZlZCAtIGV4cGVjdGVkKV4yDQpgYGANCg0KYGBge3J9DQoob2JzZXJ2ZWQgLSBleHBlY3RlZCleMiAvIGV4cGVjdGVkDQpgYGANCg0KYGBge3J9DQpzdW0oIChvYnNlcnZlZCAtIGV4cGVjdGVkKV4yIC8gZXhwZWN0ZWQgKQ0KYGBgDQoNCmBgYHtyfQ0KcWNoaXNxKCBwID0gLjk1LCBkZiA9IDMgKQ0KYGBgDQoNCg0KYGBge3J9DQpwY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMsIGxvd2VyLnRhaWwgPSBGQUxTRSApDQpgYGANCg0KYGBge3J9DQoxLXBjaGlzcSggcSA9IDguNDQsIGRmID0gMyApDQpgYGANCg0KYGBge3J9DQpnb29kbmVzc09mRml0VGVzdCggY2FyZHMkY2hvaWNlXzEgKQ0KYGBgDQoNCkRvaW5nIHRoZSBzYW1lIEdvb2RuZXNzIG9mIEZpdCB0ZXN0IHVzaW5nIGNoaXNxLnRlc3QuIA0KTm90ZTogb2JzZXJ2ZWQgZnJlcXVlbmNpZXMgYXJlIHByb3ZpZGVkIGluc3RlYWQgb2YgY2hvaWNlcy4NCmBgYHtyfQ0KY2hpc3EudGVzdCggeCA9IG9ic2VydmVkICApDQpgYGANCg0KDQoNCg0KDQpgYGB7cn0NCm51bGxQcm9icyA8LSBjKGNsdWJzID0gLjIsIGRpYW1vbmRzID0gLjMsIGhlYXJ0cyA9IC4zLCBzcGFkZXMgPSAuMikNCm51bGxQcm9icw0KYGBgDQoNCmBgYHtyfQ0KZ29vZG5lc3NPZkZpdFRlc3QoIHggPSBjYXJkcyRjaG9pY2VfMSwgcCA9IG51bGxQcm9icyApDQpgYGANCg0KYGBge3J9DQpjaGlzcS50ZXN0KCB4ID0gb2JzZXJ2ZWQsIHAgPSBjKC4yLCAuMywgLjMsIC4yKSApDQpgYGANCg0KDQoNCg0KDQpDaGkgU3EgQXNzb2NpYXRpb24gdGVzdCBXaXRoIENoYXBlazkNCg0KYGBge3J9DQpsb2FkKCBmaWxlLnBhdGgoICJjaGFwZWs5LlJkYXRhIiApKQ0Kc3RyKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpoZWFkKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpjaGFwZWtGcmVxdWVuY2llcyA8LSB4dGFicyggfiBjaG9pY2UgKyBzcGVjaWVzLCBkYXRhID0gY2hhcGVrOSkNCmNoYXBla0ZyZXF1ZW5jaWVzDQpgYGANCg0KDQpgYGB7cn0NCmFzc29jaWF0aW9uVGVzdCggZm9ybXVsYSA9IH5jaG9pY2Urc3BlY2llcywgZGF0YSA9IGNoYXBlazkgKQ0KDQpgYGANCg0KYGBge3J9DQpjcmFtZXJzViggY2hhcGVrRnJlcXVlbmNpZXMgKQ0KYGBgDQpgYGB7cn0NCmNoaXNxLnRlc3QoIGNoYXBla0ZyZXF1ZW5jaWVzICkNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KbGlicmFyeSggbHNyICkNCmxvYWQoIGZpbGUucGF0aCgicmFuZG9tbmVzcy5SZGF0YSIgKSkNCnN0cihjYXJkcykNCmBgYA0KYGBge3J9DQpvYnNlcnZlZCA8LSB0YWJsZSggY2FyZHMkY2hvaWNlXzEgKQ0Kb2JzZXJ2ZWQNCmBgYA0KDQpgYGB7cn0NCnByb2JhYmlsaXRpZXMgPC0gYyhjbHVicyA9IC4yNSwgZGlhbW9uZHMgPSAuMjUsIGhlYXJ0cyA9IC4yNSwgc3BhZGVzID0gLjI1KSANCnByb2JhYmlsaXRpZXMNCmBgYA0KDQpgYGB7cn0NCk4gPC0gMjAwICAjIHNhbXBsZSBzaXplDQpleHBlY3RlZCA8LSBOICogcHJvYmFiaWxpdGllcyAjIGV4cGVjdGVkIGZyZXF1ZW5jaWVzDQpleHBlY3RlZA0KYGBgDQoNCmBgYHtyfQ0Kb2JzZXJ2ZWQgLSBleHBlY3RlZCANCmBgYA0KDQpgYGB7cn0NCihvYnNlcnZlZCAtIGV4cGVjdGVkKV4yDQpgYGANCg0KYGBge3J9DQoob2JzZXJ2ZWQgLSBleHBlY3RlZCleMiAvIGV4cGVjdGVkDQpgYGANCg0KYGBge3J9DQpzdW0oIChvYnNlcnZlZCAtIGV4cGVjdGVkKV4yIC8gZXhwZWN0ZWQgKQ0KYGBgDQoNCmBgYHtyfQ0KcWNoaXNxKCBwID0gLjk1LCBkZiA9IDMgKQ0KYGBgDQoNCg0KYGBge3J9DQpwY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMsIGxvd2VyLnRhaWwgPSBGQUxTRSApDQpgYGANCg0KYGBge3J9DQoxLXBjaGlzcSggcSA9IDguNDQsIGRmID0gMyApDQpgYGANCg0KYGBge3J9DQpnb29kbmVzc09mRml0VGVzdCggY2FyZHMkY2hvaWNlXzEgKQ0KYGBgDQoNCkRvaW5nIHRoZSBzYW1lIEdvb2RuZXNzIG9mIEZpdCB0ZXN0IHVzaW5nIGNoaXNxLnRlc3QuIA0KTm90ZTogb2JzZXJ2ZWQgZnJlcXVlbmNpZXMgYXJlIHByb3ZpZGVkIGluc3RlYWQgb2YgY2hvaWNlcy4NCmBgYHtyfQ0KY2hpc3EudGVzdCggeCA9IG9ic2VydmVkICApDQpgYGANCg0KDQoNCg0KDQpgYGB7cn0NCm51bGxQcm9icyA8LSBjKGNsdWJzID0gLjIsIGRpYW1vbmRzID0gLjMsIGhlYXJ0cyA9IC4zLCBzcGFkZXMgPSAuMikNCm51bGxQcm9icw0KYGBgDQoNCmBgYHtyfQ0KZ29vZG5lc3NPZkZpdFRlc3QoIHggPSBjYXJkcyRjaG9pY2VfMSwgcCA9IG51bGxQcm9icyApDQpgYGANCg0KYGBge3J9DQpjaGlzcS50ZXN0KCB4ID0gb2JzZXJ2ZWQsIHAgPSBjKC4yLCAuMywgLjMsIC4yKSApDQpgYGANCg0KDQoNCg0KDQpDaGkgU3EgQXNzb2NpYXRpb24gdGVzdCBXaXRoIENoYXBlazkNCg0KYGBge3J9DQpsb2FkKCBmaWxlLnBhdGgoICJjaGFwZWs5LlJkYXRhIiApKQ0Kc3RyKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpoZWFkKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpjaGFwZWtGcmVxdWVuY2llcyA8LSB4dGFicyggfiBjaG9pY2UgKyBzcGVjaWVzLCBkYXRhID0gY2hhcGVrOSkNCmNoYXBla0ZyZXF1ZW5jaWVzDQpgYGANCg0KDQpgYGB7cn0NCmFzc29jaWF0aW9uVGVzdCggZm9ybXVsYSA9IH5jaG9pY2Urc3BlY2llcywgZGF0YSA9IGNoYXBlazkgKQ0KDQpgYGANCg0KYGBge3J9DQpjcmFtZXJzViggY2hhcGVrRnJlcXVlbmNpZXMgKQ0KDQpgYGANCg0KDQoNCg0KYGBge3J9DQpjaGlzcS50ZXN0KCBjaGFwZWtGcmVxdWVuY2llcyApDQpgYGANCg0KDQpGaXNoZXIgRXhhY3QgdGVzdDogd2hlbiBvYnNlcnZlZCBmcmVxdWVuY2llcyBhcmUgbGVzcyB0aGFuIDUgDQo4MCUgb2YgdGhlIHRpbWUgaW4gbGFyZ2VyIGRhdGFzZXRzDQoNCmBgYHtyfQ0KbG9hZCggZmlsZS5wYXRoKCAic2FsZW0uUmRhdGEiICkpDQpgYGANCg0KDQpgYGB7cn0NCnNhbGVtLnRhYnMgPC0gdGFibGUoIHRyaWFsICkNCnByaW50KCBzYWxlbS50YWJzICkNCmBgYA0KDQpgYGB7cn0NCmNoaXNxLnRlc3QoIHNhbGVtLnRhYnMgKQ0KYGBgDQoNCmBgYHtyfQ0KZmlzaGVyLnRlc3QoIHNhbGVtLnRhYnMgKQ0KYGBgDQoNCg==</div>
 
 
 
