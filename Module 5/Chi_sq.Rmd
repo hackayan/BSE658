@@ -58,6 +58,16 @@ pchisq( q = 8.44, df = 3, lower.tail = FALSE )
 goodnessOfFitTest( cards$choice_1 )
 ```
 
+Doing the same Goodness of Fit test using chisq.test. 
+Note: observed frequencies are provided instead of choices.
+```{r}
+chisq.test( x = observed  )
+```
+
+
+
+
+
 ```{r}
 nullProbs <- c(clubs = .2, diamonds = .3, hearts = .3, spades = .2)
 nullProbs
@@ -66,6 +76,14 @@ nullProbs
 ```{r}
 goodnessOfFitTest( x = cards$choice_1, p = nullProbs )
 ```
+
+```{r}
+chisq.test( x = observed, p = c(.2, .3, .3, .2) )
+```
+
+
+
+
 
 Chi Sq Association test With Chapek9
 
@@ -95,5 +113,8 @@ associationTest( formula = ~choice+species, data = chapek9 )
 
 ```{r}
 cramersV( chapekFrequencies )
+```
+```{r}
+chisq.test( chapekFrequencies )
 ```
 

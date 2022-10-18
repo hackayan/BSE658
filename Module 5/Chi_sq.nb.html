@@ -1877,28 +1877,66 @@ expected</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGNoaXNxKCBxID0gOC40NCwgZGYgPSAzLCBsb3dlci50YWlsID0gRkFMU0UgKVxuYGBgIn0= -->
-<pre class="r"><code>pchisq( q = 8.44, df = 3, lower.tail = FALSE )</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDM3NzQxODVcbiJ9 -->
-<pre><code>[1] 0.03774185</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMS1wY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMgKVxuYGBgIn0= -->
-<pre class="r"><code>1-pchisq( q = 8.44, df = 3 )</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDM3NzQxODVcbiJ9 -->
-<pre><code>[1] 0.03774185</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ29vZG5lc3NPZkZpdFRlc3QoIGNhcmRzJGNob2ljZV8xIClcbmBgYCJ9 -->
-<pre class="r"><code>goodnessOfFitTest( cards$choice_1 )</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGNoaXNxKCBxID0gOC40NCwgZGYgPSAzLCBsb3dlci50YWlsID0gRkFMU0UgKVxuYGBgXG5gYGAifQ== -->
+<pre class="r"><code>```r
+pchisq( q = 8.44, df = 3, lower.tail = FALSE )</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDM3NzQxODVcbiJ9 --&gt;
+</code></pre>
+<p>[1] 0.03774185</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuMS1wY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMgKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+1-pchisq( q = 8.44, df = 3 )</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDM3NzQxODVcbiJ9 --&gt;
+</code></pre>
+<p>[1] 0.03774185</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ29vZG5lc3NPZkZpdFRlc3QoIGNhcmRzJGNob2ljZV8xIClcbmBgYCJ9 --&gt;
+
+```r
+goodnessOfFitTest( cards$choice_1 )</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG4gICAgIENoaS1zcXVhcmUgdGVzdCBhZ2FpbnN0IHNwZWNpZmllZCBwcm9iYWJpbGl0aWVzXG5cbkRhdGEgdmFyaWFibGU6ICAgY2FyZHMkY2hvaWNlXzEgXG5cbkh5cG90aGVzZXM6IFxuICAgbnVsbDogICAgICAgIHRydWUgcHJvYmFiaWxpdGllcyBhcmUgYXMgc3BlY2lmaWVkXG4gICBhbHRlcm5hdGl2ZTogdHJ1ZSBwcm9iYWJpbGl0aWVzIGRpZmZlciBmcm9tIHRob3NlIHNwZWNpZmllZFxuXG5EZXNjcmlwdGl2ZXM6IFxuICAgICAgICAgb2JzZXJ2ZWQgZnJlcS4gZXhwZWN0ZWQgZnJlcS4gc3BlY2lmaWVkIHByb2IuXG5jbHVicyAgICAgICAgICAgICAgICAzNSAgICAgICAgICAgICA1MCAgICAgICAgICAgIDAuMjVcbmRpYW1vbmRzICAgICAgICAgICAgIDUxICAgICAgICAgICAgIDUwICAgICAgICAgICAgMC4yNVxuaGVhcnRzICAgICAgICAgICAgICAgNjQgICAgICAgICAgICAgNTAgICAgICAgICAgICAwLjI1XG5zcGFkZXMgICAgICAgICAgICAgICA1MCAgICAgICAgICAgICA1MCAgICAgICAgICAgIDAuMjVcblxuVGVzdCByZXN1bHRzOiBcbiAgIFgtc3F1YXJlZCBzdGF0aXN0aWM6ICA4LjQ0IFxuICAgZGVncmVlcyBvZiBmcmVlZG9tOiAgMyBcbiAgIHAtdmFsdWU6ICAwLjAzOCBcbiJ9 -->
 <pre><code>
@@ -1921,6 +1959,22 @@ Test results:
    X-squared statistic:  8.44 
    degrees of freedom:  3 
    p-value:  0.038 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Doing the same Goodness of Fit test using chisq.test. Note: observed
+frequencies are provided instead of choices.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggeCA9IG9ic2VydmVkICApXG5gYGAifQ== -->
+<pre class="r"><code>chisq.test( x = observed  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdENoaS1zcXVhcmVkIHRlc3QgZm9yIGdpdmVuIHByb2JhYmlsaXRpZXNcblxuZGF0YTogIG9ic2VydmVkXG5YLXNxdWFyZWQgPSA4LjQ0LCBkZiA9IDMsIHAtdmFsdWUgPSAwLjAzNzc0XG4ifQ== -->
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  observed
+X-squared = 8.44, df = 3, p-value = 0.03774</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1962,6 +2016,20 @@ Test results:
    X-squared statistic:  4.742 
    degrees of freedom:  3 
    p-value:  0.192 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggeCA9IG9ic2VydmVkLCBwID0gYyguMiwgLjMsIC4zLCAuMikgKVxuYGBgIn0= -->
+<pre class="r"><code>chisq.test( x = observed, p = c(.2, .3, .3, .2) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdENoaS1zcXVhcmVkIHRlc3QgZm9yIGdpdmVuIHByb2JhYmlsaXRpZXNcblxuZGF0YTogIG9ic2VydmVkXG5YLXNxdWFyZWQgPSA0Ljc0MTcsIGRmID0gMywgcC12YWx1ZSA9IDAuMTkxN1xuIn0= -->
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  observed
+X-squared = 4.7417, df = 3, p-value = 0.1917</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -2069,10 +2137,22 @@ Other information:
 <pre><code>[1] 0.244058</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggY2hhcGVrRnJlcXVlbmNpZXMgKVxuYGBgIn0= -->
+<pre class="r"><code>chisq.test( chapekFrequencies )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFBlYXJzb24ncyBDaGktc3F1YXJlZCB0ZXN0XG5cbmRhdGE6ICBjaGFwZWtGcmVxdWVuY2llc1xuWC1zcXVhcmVkID0gMTAuNzIyLCBkZiA9IDIsIHAtdmFsdWUgPSAwLjAwNDY5N1xuIn0= -->
+<pre><code>
+    Pearson&#39;s Chi-squared test
+
+data:  chapekFrequencies
+X-squared = 10.722, df = 2, p-value = 0.004697</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KbGlicmFyeSggbHNyICkNCmxvYWQoIGZpbGUucGF0aCgicmFuZG9tbmVzcy5SZGF0YSIgKSkNCnN0cihjYXJkcykNCmBgYA0KYGBge3J9DQpvYnNlcnZlZCA8LSB0YWJsZSggY2FyZHMkY2hvaWNlXzEgKQ0Kb2JzZXJ2ZWQNCmBgYA0KDQpgYGB7cn0NCnByb2JhYmlsaXRpZXMgPC0gYyhjbHVicyA9IC4yNSwgZGlhbW9uZHMgPSAuMjUsIGhlYXJ0cyA9IC4yNSwgc3BhZGVzID0gLjI1KSANCnByb2JhYmlsaXRpZXMNCmBgYA0KDQpgYGB7cn0NCk4gPC0gMjAwICAjIHNhbXBsZSBzaXplDQpleHBlY3RlZCA8LSBOICogcHJvYmFiaWxpdGllcyAjIGV4cGVjdGVkIGZyZXF1ZW5jaWVzDQpleHBlY3RlZA0KYGBgDQoNCmBgYHtyfQ0Kb2JzZXJ2ZWQgLSBleHBlY3RlZCANCmBgYA0KDQpgYGB7cn0NCihvYnNlcnZlZCAtIGV4cGVjdGVkKV4yDQpgYGANCg0KYGBge3J9DQoob2JzZXJ2ZWQgLSBleHBlY3RlZCleMiAvIGV4cGVjdGVkDQpgYGANCg0KYGBge3J9DQpzdW0oIChvYnNlcnZlZCAtIGV4cGVjdGVkKV4yIC8gZXhwZWN0ZWQgKQ0KYGBgDQoNCmBgYHtyfQ0KcWNoaXNxKCBwID0gLjk1LCBkZiA9IDMgKQ0KYGBgDQoNCg0KYGBge3J9DQpwY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMsIGxvd2VyLnRhaWwgPSBGQUxTRSApDQpgYGANCg0KYGBge3J9DQoxLXBjaGlzcSggcSA9IDguNDQsIGRmID0gMyApDQpgYGANCg0KYGBge3J9DQpnb29kbmVzc09mRml0VGVzdCggY2FyZHMkY2hvaWNlXzEgKQ0KYGBgDQoNCmBgYHtyfQ0KbnVsbFByb2JzIDwtIGMoY2x1YnMgPSAuMiwgZGlhbW9uZHMgPSAuMywgaGVhcnRzID0gLjMsIHNwYWRlcyA9IC4yKQ0KbnVsbFByb2JzDQpgYGANCg0KYGBge3J9DQpnb29kbmVzc09mRml0VGVzdCggeCA9IGNhcmRzJGNob2ljZV8xLCBwID0gbnVsbFByb2JzICkNCmBgYA0KDQpDaGkgU3EgQXNzb2NpYXRpb24gdGVzdCBXaXRoIENoYXBlazkNCg0KYGBge3J9DQpsb2FkKCBmaWxlLnBhdGgoICJjaGFwZWs5LlJkYXRhIiApKQ0Kc3RyKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpoZWFkKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpjaGFwZWtGcmVxdWVuY2llcyA8LSB4dGFicyggfiBjaG9pY2UgKyBzcGVjaWVzLCBkYXRhID0gY2hhcGVrOSkNCmNoYXBla0ZyZXF1ZW5jaWVzDQpgYGANCg0KDQpgYGB7cn0NCmFzc29jaWF0aW9uVGVzdCggZm9ybXVsYSA9IH5jaG9pY2Urc3BlY2llcywgZGF0YSA9IGNoYXBlazkgKQ0KDQpgYGANCg0KYGBge3J9DQpjcmFtZXJzViggY2hhcGVrRnJlcXVlbmNpZXMgKQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KbGlicmFyeSggbHNyICkNCmxvYWQoIGZpbGUucGF0aCgicmFuZG9tbmVzcy5SZGF0YSIgKSkNCnN0cihjYXJkcykNCmBgYA0KYGBge3J9DQpvYnNlcnZlZCA8LSB0YWJsZSggY2FyZHMkY2hvaWNlXzEgKQ0Kb2JzZXJ2ZWQNCmBgYA0KDQpgYGB7cn0NCnByb2JhYmlsaXRpZXMgPC0gYyhjbHVicyA9IC4yNSwgZGlhbW9uZHMgPSAuMjUsIGhlYXJ0cyA9IC4yNSwgc3BhZGVzID0gLjI1KSANCnByb2JhYmlsaXRpZXMNCmBgYA0KDQpgYGB7cn0NCk4gPC0gMjAwICAjIHNhbXBsZSBzaXplDQpleHBlY3RlZCA8LSBOICogcHJvYmFiaWxpdGllcyAjIGV4cGVjdGVkIGZyZXF1ZW5jaWVzDQpleHBlY3RlZA0KYGBgDQoNCmBgYHtyfQ0Kb2JzZXJ2ZWQgLSBleHBlY3RlZCANCmBgYA0KDQpgYGB7cn0NCihvYnNlcnZlZCAtIGV4cGVjdGVkKV4yDQpgYGANCg0KYGBge3J9DQoob2JzZXJ2ZWQgLSBleHBlY3RlZCleMiAvIGV4cGVjdGVkDQpgYGANCg0KYGBge3J9DQpzdW0oIChvYnNlcnZlZCAtIGV4cGVjdGVkKV4yIC8gZXhwZWN0ZWQgKQ0KYGBgDQoNCmBgYHtyfQ0KcWNoaXNxKCBwID0gLjk1LCBkZiA9IDMgKQ0KYGBgDQoNCg0KYGBge3J9DQpwY2hpc3EoIHEgPSA4LjQ0LCBkZiA9IDMsIGxvd2VyLnRhaWwgPSBGQUxTRSApDQpgYGANCg0KYGBge3J9DQoxLXBjaGlzcSggcSA9IDguNDQsIGRmID0gMyApDQpgYGANCg0KYGBge3J9DQpnb29kbmVzc09mRml0VGVzdCggY2FyZHMkY2hvaWNlXzEgKQ0KYGBgDQoNCkRvaW5nIHRoZSBzYW1lIEdvb2RuZXNzIG9mIEZpdCB0ZXN0IHVzaW5nIGNoaXNxLnRlc3QuIA0KTm90ZTogb2JzZXJ2ZWQgZnJlcXVlbmNpZXMgYXJlIHByb3ZpZGVkIGluc3RlYWQgb2YgY2hvaWNlcy4NCmBgYHtyfQ0KY2hpc3EudGVzdCggeCA9IG9ic2VydmVkICApDQpgYGANCg0KDQoNCg0KDQpgYGB7cn0NCm51bGxQcm9icyA8LSBjKGNsdWJzID0gLjIsIGRpYW1vbmRzID0gLjMsIGhlYXJ0cyA9IC4zLCBzcGFkZXMgPSAuMikNCm51bGxQcm9icw0KYGBgDQoNCmBgYHtyfQ0KZ29vZG5lc3NPZkZpdFRlc3QoIHggPSBjYXJkcyRjaG9pY2VfMSwgcCA9IG51bGxQcm9icyApDQpgYGANCg0KYGBge3J9DQpjaGlzcS50ZXN0KCB4ID0gb2JzZXJ2ZWQsIHAgPSBjKC4yLCAuMywgLjMsIC4yKSApDQpgYGANCg0KDQoNCg0KDQpDaGkgU3EgQXNzb2NpYXRpb24gdGVzdCBXaXRoIENoYXBlazkNCg0KYGBge3J9DQpsb2FkKCBmaWxlLnBhdGgoICJjaGFwZWs5LlJkYXRhIiApKQ0Kc3RyKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpoZWFkKGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpzdW1tYXJ5KGNoYXBlazkpDQpgYGANCg0KYGBge3J9DQpjaGFwZWtGcmVxdWVuY2llcyA8LSB4dGFicyggfiBjaG9pY2UgKyBzcGVjaWVzLCBkYXRhID0gY2hhcGVrOSkNCmNoYXBla0ZyZXF1ZW5jaWVzDQpgYGANCg0KDQpgYGB7cn0NCmFzc29jaWF0aW9uVGVzdCggZm9ybXVsYSA9IH5jaG9pY2Urc3BlY2llcywgZGF0YSA9IGNoYXBlazkgKQ0KDQpgYGANCg0KYGBge3J9DQpjcmFtZXJzViggY2hhcGVrRnJlcXVlbmNpZXMgKQ0KYGBgDQpgYGB7cn0NCmNoaXNxLnRlc3QoIGNoYXBla0ZyZXF1ZW5jaWVzICkNCmBgYA0KDQo=</div>
 
 
 
