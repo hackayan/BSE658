@@ -144,4 +144,30 @@ chisq.test( salem.tabs )
 ```{r}
 fisher.test( salem.tabs )
 ```
+McNemar Test (remember paired samples t test? This is the equivalent test for nominal variables) 
+
+```{r}
+load( file.path( "agpp.Rdata" ))
+```
+
+```{r}
+str(agpp)
+```
+
+```{r}
+head(agpp)
+```
+
+```{r}
+summary(agpp)    
+```
+
+```{r}
+right.table <- xtabs( ~ response_before + response_after, data = agpp)
+print( right.table )
+```
+
+```{r}
+mcnemar.test( right.table )
+```
 
