@@ -82,9 +82,6 @@ chisq.test( x = observed, p = c(.2, .3, .3, .2) )
 ```
 
 
-
-
-
 Chi Sq Association test With Chapek9
 
 ```{r}
@@ -121,6 +118,10 @@ cramersV( chapekFrequencies )
 
 ```{r}
 chisq.test( chapekFrequencies )
+```
+```{r}
+library(chisq.posthoc.test)
+chisq.posthoc.test(chapekFrequencies)
 ```
 
 
