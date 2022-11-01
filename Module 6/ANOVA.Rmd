@@ -1,0 +1,299 @@
+---
+title: "ANOVA"
+output: html_document
+date: "2022-10-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## R Markdown
+Suppose you are testing a new antidepressant drug called Joyzepam. To test of the drug’s effectiveness, the study involves three separate drugs to be administered.
+One is a placebo, and the other is an existing antidepressant / anti-anxiety drug called Anxifree.
+18 participants with moderate to severe depression are recruited for your initial testing
+the drugs are sometimes administered in conjunction with psychological therapy, your study includes 9 people undergoing cognitive behavioural therapy (CBT) and 9 who are not.
+Participants are randomly assigned (doubly blinded, of course) a treatment, such that there are 3 CBT people and 3 no-therapy people assigned to each of the 3 drugs. A psychologist assesses the mood of each person after a 3 month run with each drug: and the overall improvement in each person’s mood is assessed on a scale ranging from  −5 to +5.
+let’s now look at what we’ve got in the data file:
+```{r ANOVA}
+projecthome = "D:/Stats class"; #enter folder name where the data is downloaded
+load(file.path(projecthome, "clinicaltrial.Rdata")) # load data
+str(clin.trial)
+print( clin.trial )
+```
+Lets see how many people we have in each group:
+
+```{r Opening Data}
+xtabs( ~drug, clin.trial )
+```
+calculate means and standard deviations
+
+```{r Opening Data}
+aggregate( mood.gain ~ drug, clin.trial, mean )
+```
+
+produce a pretty picture plots
+You might want to install it by using (install.packages("gplots"))
+observe the graph carefully 
+```{r Opening Data}
+library(gplots)
+plotmeans(  formula = mood.gain ~ drug,  # plot mood.gain by drug
+            data = clin.trial,           # the data frame
+            xlab = "Drug Administered",  # x-axis label
+            ylab = "Mood Gain",          # y-axis label
+            n.label = FALSE              # don't display sample size
+)
+```
+The question that we want to answer is: are these difference “real”, or are they just due to chance? To answer the question posed by our clinical trial data, we’re going to run a one-way ANOVA. We’re interested in comparing the average mood change for the three different drugs.
+
+let μP denote the population mean for the mood change induced by the placebo, and let μA and μJ denote the corresponding means for our two drugs, Anxifree and Joyzepam.
+
+null hypothesis = H0: it is true that μP=μA=μJ (all three equal)
+alternative hypothesis = H1:it is *not* true that μP=μA=μJ
+
+We’ll start out by playing around with variances, and it will turn out that this gives us a useful tool for investigating means.
+
+There are Two formulas for the variance, Can you recall the formula ?
+sum of squares = same as variance but not divided by N i.e. instead of averaging the squared deviations, which is what we do when calculating the variance, we just add them up
+
+This can be done within grp as well as between grps (students can try and plot within grp vs between grp sum of squares.)
+
+Qualitative idea behind ANOVA is to compare the two sums of squares values
+
+SSb and SSw to each other: if the between-group variation is SSb is large relative to the within-group variation, SSw then we have reason to suspect that the population means for the different groups aren’t identical to each other
+
+What we do to calculate our test statistic – which is called an F ratio
+
+convert our SS values into an  F-ratio
+“the variation due to the differences in the sample means for the different groups” (SSb) plus “all the rest of the variation” (SSw)
+
+calculate the degrees of freedom associated with the SSb and SSw values. The degrees of freedom corresponds to the number of unique “data points” that contribute to a particular calculation, minus the number of “constraints” that they need to satisfy.
+
+Within-groups variability, what we’re calculating is the variation of the individual observations (Ndata points) around the group means for the between groups variability, we’re interested in the variation of the group means (G data points) around the grand mean (1 constraint)
+
+The intuition behind the  F statistic is straightforward: bigger values of F means that the between-groups variation is large, relative to the within-groups variation , larger the value of F, the more evidence we have against the null hypothesis.
+
+lets see an example, recall the the means of the three groups that were administered different drugs
+
+```{r Opening Data}
+outcome <- clin.trial$mood.gain
+group <- clin.trial$drug
+gp.means <- tapply(outcome,group,mean)
+gp.means <- gp.means[group]
+dev.from.gp.means <- outcome - gp.means
+squared.devs <- dev.from.gp.means ^2
+#putting variables in the dataframe 
+Y <- data.frame( group, outcome, gp.means,
+                 dev.from.gp.means, squared.devs )
+print(Y, digits = 2)
+```
+Calculations of the within-group sum of squares 
+
+```{r Opening Data}
+SSw <- sum( squared.devs )
+print( SSw )
+```
+Now that we’ve calculated the within groups variation, SSw, it’s time to turn our attention to the between-group sum of squares, SSb.
+We calculate the differences between the group means and the grand mean.
+
+However, for the between group calculations we need to multiply each of these squared deviations by Nk, the number of observations in the group (guess why?)
+
+For between group calculations
+```{r Opening Data}
+gp.means <- tapply(outcome,group,mean)
+grand.mean <- mean(outcome)
+dev.from.grand.mean <- gp.means - grand.mean
+squared.devs <- dev.from.grand.mean ^2
+gp.sizes <- tapply(outcome,group,length)
+wt.squared.devs <- gp.sizes * squared.devs
+```
+dump all our variables into a data frame
+
+```{r Opening Data}
+Y <- data.frame( gp.means, grand.mean, dev.from.grand.mean, 
+                 squared.devs, gp.sizes, wt.squared.devs )
+print(Y, digits = 2)
+```
+rounded all my numbers to 2 decimal places ;)
+
+```{r Opening Data}
+SSb <- sum( wt.squared.devs )
+print( SSb )
+```
+We’ve calculated our sums of squares values, SSb and SSw
+
+The next step is to calculate the degrees of freedom. Since we have G=3 groups and  N=18 observations in total, our degrees of freedom can be calculated by simple subtraction:
+  dfb = G−1 = 2
+  dfw = N−G = 15
+
+since we’ve now calculated the values for the sums of squares and the degrees of freedom, for both the within-groups variability and the between-groups variability, we can obtain the mean square values by dividing one by the other:
+  MSb = SSb/dfb = 3.45/2 = 1.73
+  MSw = SSw/dfw = 1.39/15= 0.09
+
+We calculate F-values by dividing the between-groups MS value by the and within-groups MS value.
+  F = MSb/MSw = 1.73/0.09 = 18.6
+
+It is easier to directly calculate the p-value. 
+
+reject the null hypothesis for very large F-values
+
+
+```{r Opening Data}
+pf( 18.6, df1 = 2, df2 = 15, lower.tail = FALSE)
+```
+You get a p-value, we’re pretty much guaranteed to reject the null hypothesis.
+
+A pretty standard way of reporting this result would be to write something like this:
+One-way ANOVA showed a significant effect of drug on mood gain (F (2,15) = 18.6, p<.001).
+
+Using the aov() function to specify your ANOVA: type '?aov' and have a look at the help documentation
+
+```{r Opening Data}
+my.anova <-  aov( formula = mood.gain ~ drug, data = clin.trial ) 
+print( my.anova )
+```
+R doesn’t use the names “between-group” and “within-group”
+instead : between groups variance corresponds to the effect that the drug has on the outcome variable; and the within groups variance is corresponds to the “leftover” variability, so it calls that the residuals.
+
+but wait  Where’s the  F-value? The  p-value? These are the most important numbers in our hypothesis test
+
+ask for a summary() 
+
+
+
+```{r Opening Data}
+summary( my.anova )
+```
+
+Effect size
+most commonly used measures to calculate effect size are  η2 (eta squared) and partial  η2
+  η2 = SSb/SStot
+
+interpretation of  η2 is equally straightforward: it refers to the proportion of the variability in the outcome variable (mood.gain) that can be explained in terms of the predictor (drug). A value of  
+  η2 = 0, means that there is no relationship at all between the two, whereas  
+  η2 = 1, means that the relationship is perfect.
+
+you can derive pearson correlation from η2 by taking an underoot of it i.e. η
+
+core packages in R don’t include any functions for calculating  η2
+mannually we can do this
+```{r Opening Data}
+SStot <- SSb + SSw          # total sums of squares
+eta.squared <- SSb / SStot  # eta-squared value
+print( eta.squared )
+```
+or use function directly
+load libraray(lsr) 
+```{r Opening Data}
+etaSquared( x = my.anova ) 
+```
+Multiple comparisons and post hoc tests
+
+Running “pairwise”  t-tests ask your professor why to do a t-test
+There’s a couple of ways that we could do this. One method would be to construct new variables corresponding the groups you want to compare (e.g., anxifree, placebo and joyzepam), and then run a  t-test on these new variables:
+
+```{r Opening Data}
+anxifree <- with(clin.trial, mood.gain[drug == "anxifree"])  # mood change due to anxifree
+placebo <- with(clin.trial, mood.gain[drug == "placebo"])    # mood change due to placebo 
+
+t.test( anxifree, placebo, var.equal = TRUE )   # Student t-test
+```
+or, you could use 
+
+```{r Opening Data}
+t.test( formula = mood.gain ~ drug, 
+        data = clin.trial, 
+        subset = drug %in% c("placebo","anxifree"), 
+        var.equal = TRUE )
+```
+function called pairwise.t.test() that automatically runs all of the  t-tests for you.
+
+```{r Opening Data}
+pairwise.t.test( x = clin.trial$mood.gain,   # outcome variable
+                 g = clin.trial$drug,        # grouping variable
+                 p.adjust.method = "none" )   # which correction to use?
+```
+Corrections for multiple testing
+#each individual  
+
+t-test is designed to have a 5% Type I error rate (i.e.,α = 0.05), imagine if you have more than 10 groups !
+correction for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
+
+Bonferroni corrections
+
+post hoc analysis consists of  m separate tests, and I want to ensure that the total probability of making any Type I errors at all is at most α.
+the Bonferroni correction just says “multiply all your raw  p-values by m”
+```{r Opening Data}
+pairwise.t.test( x = clin.trial$mood.gain,   # outcome variable
+                 g = clin.trial$drug,        # grouping variable
+                 p.adjust.method = "bonferroni" )   # set p.adjust.method = "bonferroni"
+```
+Holm corrections
+
+Holm correction is to pretend that you’re doing the tests sequentially; starting with the smallest (raw) p-value and moving onto the largest one.
+First, you sort all of your p-values in order, from smallest to largest. For the smallest p-value all you do is multiply it by m when you move to the second smallest p value, you first multiply it by  m−1.If this produces a number that is bigger than the adjusted p-value that you got last time, then you keep it. But if it’s smaller than the last one, then you copy the last p-value. 
+
+To run the Holm correction in R, you could specify p.adjust.method = "Holm" in the above equation  or 
+```{r Opening Data}
+posthocPairwiseT( my.anova ) #takes Holm's correction by default.
+```
+Assumptions of one-way ANOVA
+
+There are three key assumptions that you need to be aware of: normality, homogeneity of variance and independence
+
+Checking the homogeneity of variance assumption
+Levene test involve checking the assumptions of an ANOVA
+
+```{r Opening Data}
+leveneTest(y = mood.gain ~ drug, data = clin.trial)   # y is a formula in this case
+leveneTest(y = clin.trial$mood.gain, group = clin.trial$drug)   # y is the outcome
+```
+Is your levene test significant ? What do you observe ?
+
+Removing the homogeneity of variance assumption
+```{r Opening Data}
+oneway.test(mood.gain ~ drug, data = clin.trial) #  Welch one-way ANOVA
+```
+Originally our ANOVA gave us the result F(2,15) = 18.6, oneway.test(mood.gain ~ drug, data = clin.trial, var.equal = TRUE)
+whereas the Welch one-way test gave us F(2,9.49)=26.32.
+In other words, the Welch test has reduced the within-groups degrees of freedom from 15 to 9.49, and the F-value has increased from 18.6 to 26.32.
+
+Checking the normality assumption
+we need to know how to pull out the residuals (i.e., the ϵik values) so that we can draw our QQ plot and run our Shapiro-Wilk test. 
+
+First, let’s extract the residuals (Can you recall what are residuals ?)
+
+```{r Opening Data}
+my.anova.residuals <- residuals( object = my.anova )   # extract the residuals
+hist( x = my.anova.residuals )           # plot a histogram (similar to Figure @ref{fig:normalityanova}a)
+qqnorm( y = my.anova.residuals )         # draw a QQ plot (similar to Figure @ref{fig:normalityanova}b)
+shapiro.test( x = my.anova.residuals )   # run Shapiro-Wilk test
+```
+
+Removing the normality assumption (what we can do to address violations of normality)
+
+switch to a non-parametric test (i.e., one that doesn’t rely on any particular assumption about the kind of distribution involved)
+Wilcoxon test provides the non-parametric alternative for two groups
+
+But, What if I got three or more groups? 
+you can use the Kruskal-Wallis rank sum test
+
+```{r Opening Data}
+kruskal.test(mood.gain ~ drug, data = clin.trial)
+```
+Relationship between ANOVA and the Student  t-test
+
+```{r Opening Data}
+summary( aov( mood.gain ~ therapy, data = clin.trial ))
+```
+looks like there’s no significant effect here at all 
+
+```{r Opening Data}
+t.test( mood.gain ~ therapy, data = clin.trial, var.equal = TRUE )
+```
+p-values are identical
+what about the test statistic? Having run a  t-test instead of an ANOVA, we get a somewhat different answer, namely t(16) = −1.3068.
+
+there is a fairly straightforward relationship here. If we square the t-statistic we get the  F-statistic from before.
+
+```{r Opening Data}
+1.3068 ^ 2
