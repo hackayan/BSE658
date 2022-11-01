@@ -15,8 +15,7 @@ the drugs are sometimes administered in conjunction with psychological therapy, 
 Participants are randomly assigned (doubly blinded, of course) a treatment, such that there are 3 CBT people and 3 no-therapy people assigned to each of the 3 drugs. A psychologist assesses the mood of each person after a 3 month run with each drug: and the overall improvement in each person’s mood is assessed on a scale ranging from  −5 to +5.
 let’s now look at what we’ve got in the data file:
 ```{r ANOVA}
-projecthome = "D:/Stats class"; #enter folder name where the data is downloaded
-load(file.path(projecthome, "clinicaltrial.Rdata")) # load data
+load( file.path("clinicaltrial.Rdata" ))
 str(clin.trial)
 print( clin.trial )
 ```
@@ -182,7 +181,6 @@ eta.squared <- SSb / SStot  # eta-squared value
 print( eta.squared )
 ```
 or use function directly
-load libraray(lsr) 
 ```{r Opening Data}
 etaSquared( x = my.anova ) 
 ```
@@ -213,9 +211,9 @@ pairwise.t.test( x = clin.trial$mood.gain,   # outcome variable
                  p.adjust.method = "none" )   # which correction to use?
 ```
 Corrections for multiple testing
-#each individual  
 
 t-test is designed to have a 5% Type I error rate (i.e.,α = 0.05), imagine if you have more than 10 groups !
+
 correction for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
 
 Bonferroni corrections
