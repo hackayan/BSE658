@@ -2180,6 +2180,12 @@ the time in larger datasets</p>
 <pre class="r"><code>salem.tabs &lt;- table( trial )
 print( salem.tabs )</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIG9uLmZpcmVcbmhhcHB5ICAgRkFMU0UgVFJVRVxuICBGQUxTRSAgICAgMyAgICAzXG4gIFRSVUUgICAgIDEwICAgIDBcbiJ9 -->
+<pre><code>       on.fire
+happy   FALSE TRUE
+  FALSE     3    3
+  TRUE     10    0</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2187,6 +2193,16 @@ print( salem.tabs )</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2hpc3EudGVzdCggc2FsZW0udGFicyApXG5gYGAifQ== -->
 <pre class="r"><code>chisq.test( salem.tabs )</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogQ2hpLXNxdWFyZWQgYXBwcm94aW1hdGlvbiBtYXkgYmUgaW5jb3JyZWN0XG4ifQ== -->
+<pre><code>Warning: Chi-squared approximation may be incorrect</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdFBlYXJzb24ncyBDaGktc3F1YXJlZCB0ZXN0IHdpdGggWWF0ZXMnIGNvbnRpbnVpdHkgY29ycmVjdGlvblxuXG5kYXRhOiAgc2FsZW0udGFic1xuWC1zcXVhcmVkID0gMy4zMDk0LCBkZiA9IDEsIHAtdmFsdWUgPSAwLjA2ODg4XG4ifQ== -->
+<pre><code>
+    Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+
+data:  salem.tabs
+X-squared = 3.3094, df = 1, p-value = 0.06888</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2194,6 +2210,19 @@ print( salem.tabs )</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlzaGVyLnRlc3QoIHNhbGVtLnRhYnMgKVxuYGBgIn0= -->
 <pre class="r"><code>fisher.test( salem.tabs )</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdEZpc2hlcidzIEV4YWN0IFRlc3QgZm9yIENvdW50IERhdGFcblxuZGF0YTogIHNhbGVtLnRhYnNcbnAtdmFsdWUgPSAwLjAzNTcxXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG9kZHMgcmF0aW8gaXMgbm90IGVxdWFsIHRvIDFcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjAwMDAwMCAxLjIwMjkxM1xuc2FtcGxlIGVzdGltYXRlczpcbm9kZHMgcmF0aW8gXG4gICAgICAgICAwIFxuIn0= -->
+<pre><code>
+    Fisher&#39;s Exact Test for Count Data
+
+data:  salem.tabs
+p-value = 0.03571
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.000000 1.202913
+sample estimates:
+odds ratio 
+         0 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>McNemar Test (remember paired samples t test? This is the equivalent
@@ -2210,6 +2239,12 @@ test for nominal variables)</p>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKGFncHApXG5gYGAifQ== -->
 <pre class="r"><code>str(agpp)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJ2RhdGEuZnJhbWUnOlx0MTAwIG9icy4gb2YgIDMgdmFyaWFibGVzOlxuICQgaWQgICAgICAgICAgICAgOiBGYWN0b3Igdy8gMTAwIGxldmVscyBcInN1YmouMVwiLFwic3Viai4xMFwiLC4uOiAxIDEzIDI0IDM1IDQ2IDU3IDY4IDc5IDkwIDIgLi4uXG4gJCByZXNwb25zZV9iZWZvcmU6IEZhY3RvciB3LyAyIGxldmVscyBcIm5vXCIsXCJ5ZXNcIjogMSAyIDIgMiAxIDEgMSAxIDEgMSAuLi5cbiAkIHJlc3BvbnNlX2FmdGVyIDogRmFjdG9yIHcvIDIgbGV2ZWxzIFwibm9cIixcInllc1wiOiAyIDEgMSAxIDEgMSAxIDIgMSAxIC4uLlxuIn0= -->
+<pre><code>&#39;data.frame&#39;:   100 obs. of  3 variables:
+ $ id             : Factor w/ 100 levels &quot;subj.1&quot;,&quot;subj.10&quot;,..: 1 13 24 35 46 57 68 79 90 2 ...
+ $ response_before: Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 2 2 2 1 1 1 1 1 1 ...
+ $ response_after : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 1 1 1 1 1 1 2 1 1 ...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2217,6 +2252,13 @@ test for nominal variables)</p>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChhZ3BwKVxuYGBgIn0= -->
 <pre class="r"><code>head(agpp)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbNiDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJxM1ZUVy9UTUJqQWNUZHBPbFpwREluTDdwd2JqVGlKNHp2aUF5QW03WWJTMW9WQ1NLb2taWERqazI5ejJyanEzd0tKQTVHcytQSEw4L3ljUS96aDNiMmMzOCtGRUtHWUJoTVJScllyb3J1UDd4ZUZzQ00ybUlpcHVCemVQKzJpMTRlVklyeXk3OWxoVW9paGYyUGJHOXRpMjdTM2NWYVpINmJxYk8rVmJXczMydTJYWCtPM1kzUnhqRzdIOE1VWTNuTGFXNTB3bEF4VGhobkRuS0ZpV0REVU1MTnNRbU5DWStJdHBqR2hNYUV4b1RHaE1hRXhvWkYxSkkyU1JrbWo5UGJTS0dtVU5Fb2FKWTJTUmlaT2FVeHBUR2xNYVV5OVZEU21OS1kwcGpTbU5ESlRSbU5HWTBaalJtTkdZK1pscGpHak1hTXhvNUZiY3hwekduTWFjeHB6R25NYWM2OFFqVG1OT1kxY3EyaFVOQ29hRlkyS1JrV2pvbEY1ZFdsVU5IS3lvTEdnc2FDeG9MR2dzYUN4b0xHZ3NmQVlOR3BNYWhvMWpacEdUYU9tVWRPb2FkUTBhaHExLzhlUFZsWFp1Ui8rNlJyWWxLdSthVzN2MGJ0QWdyTTJPYlloWGZBMFpnakdERUhkakwzd2wrbU9pOEtuZnlwemx2cTgvYWN5UEh4ZGZqZnU4S0hMdVhYMzNuVnJ1bDFUZCtiVDBteWExb3pETDAvRDVhWTNyWmZ6c20wZVlwZDNPRlB3V3h5ZTJWOTQ4M1habC9HbXRWditRTHhvZHYzV0ZyTjVoZ3M5OGpaUFdtL2dlbDhQeGRlTDFaZDkvVzJoaGdKbkgvSnFmTS9PK3VHeDVOVEJJdmZkVFAxNVc3dFRSMVc1Tk5YcEV6UVBoelBHdTNaYjkrNGtkclNMKzZZdjNicjVxcW5jeU9GczR2RVp3OGxnM3NjSUFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["id"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["response_before"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["response_after"],"name":[3],"type":["fctr"],"align":["left"]}],"data":[{"1":"subj.1","2":"no","3":"yes","_rn_":"1"},{"1":"subj.2","2":"yes","3":"no","_rn_":"2"},{"1":"subj.3","2":"yes","3":"no","_rn_":"3"},{"1":"subj.4","2":"yes","3":"no","_rn_":"4"},{"1":"subj.5","2":"no","3":"no","_rn_":"5"},{"1":"subj.6","2":"no","3":"no","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2224,6 +2266,16 @@ test for nominal variables)</p>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShhZ3BwKSAgICBcbmBgYCJ9 -->
 <pre class="r"><code>summary(agpp)    </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICBpZCAgICAgcmVzcG9uc2VfYmVmb3JlIHJlc3BvbnNlX2FmdGVyXG4gc3Viai4xICA6IDEgICBubyA6NzAgICAgICAgICAgbm8gOjkwICAgICAgICBcbiBzdWJqLjEwIDogMSAgIHllczozMCAgICAgICAgICB5ZXM6MTAgICAgICAgIFxuIHN1YmouMTAwOiAxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gc3Viai4xMSA6IDEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiBzdWJqLjEyIDogMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIHN1YmouMTMgOiAxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gKE90aGVyKSA6OTQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>        id     response_before response_after
+ subj.1  : 1   no :70          no :90        
+ subj.10 : 1   yes:30          yes:10        
+ subj.100: 1                                 
+ subj.11 : 1                                 
+ subj.12 : 1                                 
+ subj.13 : 1                                 
+ (Other) :94                                 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2232,6 +2284,12 @@ test for nominal variables)</p>
 <pre class="r"><code>right.table &lt;- xtabs( ~ response_before + response_after, data = agpp)
 print( right.table )</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgcmVzcG9uc2VfYWZ0ZXJcbnJlc3BvbnNlX2JlZm9yZSBubyB5ZXNcbiAgICAgICAgICAgIG5vICA2NSAgIDVcbiAgICAgICAgICAgIHllcyAyNSAgIDVcbiJ9 -->
+<pre><code>               response_after
+response_before no yes
+            no  65   5
+            yes 25   5</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
