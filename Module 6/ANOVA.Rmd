@@ -7,6 +7,13 @@ date: "2022-10-31"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r}
+library(lsr)
+```
+
+
+
 ## R Markdown
 Suppose you are testing a new antidepressant drug called Joyzepam. To test of the drug’s effectiveness, the study involves three separate drugs to be administered.
 One is a placebo, and the other is an existing antidepressant / anti-anxiety drug called Anxifree.
@@ -20,6 +27,9 @@ str(clin.trial)
 print( clin.trial )
 ```
 Lets see how many people we have in each group:
+```{r}
+
+```
 
 ```{r Opening Data}
 xtabs( ~drug, clin.trial )
@@ -214,7 +224,7 @@ Corrections for multiple testing
 
 t-test is designed to have a 5% Type I error rate (i.e.,α = 0.05), imagine if you have more than 10 groups !
 
-correction for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
+c   orrection for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
 
 Bonferroni corrections
 
@@ -278,20 +288,35 @@ you can use the Kruskal-Wallis rank sum test
 ```{r Opening Data}
 kruskal.test(mood.gain ~ drug, data = clin.trial)
 ```
-Relationship between ANOVA and the Student  t-test
 
-```{r Opening Data}
-summary( aov( mood.gain ~ therapy, data = clin.trial ))
+Two-factor ANOVA:
+What if you want to look at the effect of Drug and Therapy?
+
+```{r One factor ANOVA}
+model.1 <- aov( mood.gain ~ drug, clin.trial )  
+summary( model.1 )  
 ```
-looks like there’s no significant effect here at all 
 
-```{r Opening Data}
-t.test( mood.gain ~ therapy, data = clin.trial, var.equal = TRUE )
+```{r Two factor ANOVA}
+model.2 <- aov( mood.gain ~ drug + therapy, clin.trial )  
+summary(model.2)
 ```
-p-values are identical
-what about the test statistic? Having run a  t-test instead of an ANOVA, we get a somewhat different answer, namely t(16) = −1.3068.
+Computing Effect Size
+```{r}
+etaSquared( model.2 )
+```
 
-there is a fairly straightforward relationship here. If we square the t-statistic we get the  F-statistic from before.
 
-```{r Opening Data}
-1.3068 ^ 2
+
+
+
+Now, how do you determine whether the drug and therapy interact? 
+```{r Two factor ANOVA with interaction effects}
+model.3 <- aov( mood.gain ~ drug + therapy + drug:therapy, clin.trial )  
+summary(model.3)
+```
+```{r}
+etaSquared( model.3 )
+```
+
+
