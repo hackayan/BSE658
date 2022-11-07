@@ -1,0 +1,171 @@
+---
+title: "Regression"
+output: html_document
+date: "2022-11-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) # set curretn path as workpath
+```
+
+
+
+```{r}
+load( file.path("parenthood.Rdata" ))
+colnames(parenthood) <- c('dan.sleep','baby.sleep','dan.grump','day')
+```
+
+linear regression:
+dan.grump ~ dan.sleep
+```{r}
+regression.1 <- lm( formula = dan.grump ~ dan.sleep,  
+                    data = parenthood )
+print( regression.1 )
+```
+##Multiple linear regression
+dan.grump ~ dan.sleep + baby.sleep
+
+```{r}
+regression.2 <- lm( formula = dan.grump ~ dan.sleep + baby.sleep,  
+                     data = parenthood )
+print( regression.2 )
+```
+
+
+The  R-squared value Calculation 
+
+
+#Calculating y-predicted
+```{r}
+X <- parenthood$dan.sleep  # the predictor
+Y <- parenthood$dan.grump  # the outcome
+Y.pred <-  -8.95025 * X  +  125.96557
+
+```
+
+#calculating residue
+```{r}
+SS.resid <- sum( (Y - Y.pred)^2 )
+print( SS.resid )
+```
+
+
+```{r}
+SS.tot <- sum( (Y - mean(Y))^2 )
+print( SS.tot )
+```
+
+
+```{r}
+R.squared <- 1 - (SS.resid / SS.tot)
+print( R.squared )
+```
+
+```{r}
+r <- cor(X, Y)  # calculate the correlation
+print( r^2 )  
+```
+
+```{r}
+print( regression.2 ) 
+```
+
+```{r}
+summary( regression.2 )
+```
+```{r}
+summary( regression.1 )
+```
+
+```{r}
+cor.test( x = parenthood$dan.sleep, y = parenthood$dan.grump )
+```
+
+```{r}
+library(lsr)
+correlate(parenthood, test=TRUE)
+```
+
+```{r}
+confint( object = regression.2,
+        level = .99)
+```
+
+```{r}
+standardCoefs( regression.2 )
+
+```
+
+```{r}
+residuals( object = regression.2 )
+```
+
+```{r}
+rstandard( model = regression.2 )
+```
+
+```{r}
+rstudent( model = regression.2 )
+```
+
+```{r}
+hatvalues( model = regression.2 )
+```
+
+```{r}
+ckd <- cooks.distance( model = regression.2 )
+plot(regression.2,which=4)
+```
+```{r}
+lm( formula = dan.grump ~ dan.sleep + baby.sleep,  # same formula
+     data = parenthood,       # same data frame...
+     subset = -64             # ...but observation 64 is deleted
+ )
+```
+```{r}
+ hist( x = residuals( regression.2 ),   # data are the residuals
+       xlab = "Value of residual",      # x-axis label
+       main = "",                       # no title 
+       breaks = 20                      # lots of breaks
+ )
+```
+```{r}
+plot( x = regression.2, which = 2 )
+```
+
+Backward elimination
+
+```{r}
+full.model <- lm( formula = dan.grump ~ dan.sleep + baby.sleep + day,  
+                   data = parenthood  
+ )
+```
+
+```{r}
+ step( object = full.model,     # start at the full model
+       direction = "backward"   # allow it remove predictors but not add them
+ )
+```
+Forward selection
+```{r}
+ null.model <- lm( dan.grump ~ 1, parenthood )   # intercept only.
+ step( object = null.model,     # start with null.model
+       direction = "forward",   # only consider "addition" moves
+       scope =  dan.grump ~ dan.sleep + baby.sleep + day  # largest model allowed
+ )
+```
+ Comparing two regression models
+```{r}
+M0 <- lm( dan.grump ~ dan.sleep + day, parenthood )
+M1 <- lm( dan.grump ~ dan.sleep + day + baby.sleep, parenthood )
+```
+
+```{r}
+AIC( M0, M1 )
+```
+
+```{r}
+anova( M0, M1 )
+```
+
