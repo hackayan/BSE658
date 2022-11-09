@@ -26,10 +26,6 @@ load( file.path("clinicaltrial.Rdata" ))
 str(clin.trial)
 print( clin.trial )
 ```
-Lets see how many people we have in each group:
-```{r}
-
-```
 
 ```{r Opening Data}
 xtabs( ~drug, clin.trial )
@@ -224,7 +220,7 @@ Corrections for multiple testing
 
 t-test is designed to have a 5% Type I error rate (i.e.,α = 0.05), imagine if you have more than 10 groups !
 
-c   orrection for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
+correction for multiple comparisons, though it is sometimes referred to as “simultaneous inference”
 
 Bonferroni corrections
 
@@ -252,6 +248,7 @@ Checking the homogeneity of variance assumption
 Levene test involve checking the assumptions of an ANOVA
 
 ```{r Opening Data}
+library(car)
 leveneTest(y = mood.gain ~ drug, data = clin.trial)   # y is a formula in this case
 leveneTest(y = clin.trial$mood.gain, group = clin.trial$drug)   # y is the outcome
 ```
@@ -307,6 +304,10 @@ etaSquared( model.2 )
 ```
 
 
+```{r}
+interaction.plot(x.factor = clin.trial$drug, response = clin.trial$mood.gain, 
+                 trace.factor = clin.trial$therapy)
+```
 
 
 
