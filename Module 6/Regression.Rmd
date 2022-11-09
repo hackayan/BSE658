@@ -86,14 +86,27 @@ hatvalues( model = regression.2 )
 
 ```{r}
 ckd <- cooks.distance( model = regression.2 )
+ckd
+```
+
+Directly plotting Cook's distance using plot from car package
+```{r}
 plot(regression.2,which=4)
 ```
+
+
+
+
 ```{r}
 lm( formula = dan.grump ~ dan.sleep + baby.sleep,  # same formula
      data = parenthood,       # same data frame...
      subset = -64             # ...but observation 64 is deleted
  )
 ```
+
+
+
+
 ```{r}
  hist( x = residuals( regression.2 ),   # data are the residuals
        xlab = "Value of residual",      # x-axis label
@@ -101,9 +114,25 @@ lm( formula = dan.grump ~ dan.sleep + baby.sleep,  # same formula
        breaks = 20                      # lots of breaks
  )
 ```
+
+
+Directly make the QQ plot of residuals
+
 ```{r}
 plot( x = regression.2, which = 2 )
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
 Backward elimination
 
