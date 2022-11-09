@@ -302,6 +302,15 @@ Computing Effect Size
 ```{r}
 etaSquared( model.2 )
 ```
+Running a posthoc test on 2-way ANOVA
+Using tukey HSD because it can run on more complex models.
+```{r}
+TukeyHSD( model.2 )
+```
+
+
+
+
 
 
 ```{r}
