@@ -13,16 +13,27 @@ install.packages('lsr')
 ```
 
 ```{r}
-
-```
-
-
-```{r}
 library(lsr)
 load( file.path("zeppo.Rdata" )) 
 oneSampleTTest( x=grades, mu=67.5 ) #add the mu value here
 
 ```
+```{r}
+install.packages('MKinfer')
+```
+
+```{r}
+library(MKinfer)
+```
+
+
+```{r}
+boot.t.test( x=grades, mu=67.5 )
+```
+
+
+
+
 
 
 ```{r}
@@ -43,6 +54,16 @@ independentSamplesTTest(
       var.equal = TRUE          # assume that the two groups have the same variance
   )
 ```
+
+```{r}
+boot.t.test( 
+      formula = grade ~ tutor,  # formula specifying outcome and group variables
+      data = harpo            # data frame that contains the variables
+  )
+```
+
+
+
 ```{r}
 library(car)
 ```
