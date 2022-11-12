@@ -122,14 +122,46 @@ Directly make the QQ plot of residuals
 plot( x = regression.2, which = 2 )
 ```
 
+Checking linearity of relationship
+```{r}
+yhat.2 <- fitted.values( object = regression.2 )
+ plot( x = yhat.2, 
+       y = parenthood$dan.grump,
+       xlab = "Fitted Values",
+       ylab = "Observed Values" 
+ )
+```
 
 
+Checking this using residuals -- using plot
+```{r}
+plot(x = regression.2, which = 1)
+
+```
 
 
+```{r}
+residualPlots( model = regression.2 ) 
+```
+
+If the curvature is significant, then you might want to transform the predictor using Box Cox Transformation. Or use the powerTransform() in the car package.
 
 
+Checking homogeneity of variance
+```{r}
+plot(x = regression.2, which = 3)
 
+```
+```{r}
+ncvTest( regression.2 )
 
+```
+
+Lastly, we assess the variance inflation factor -- to diagnose for collinearity
+
+```{r}
+vif( mod = regression.2 )
+```
 
 
 
