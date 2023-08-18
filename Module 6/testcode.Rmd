@@ -1,0 +1,268 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Testing
+
+```{r}
+data()
+```
+
+
+```{r}
+data(package = .packages(all.available = TRUE))
+```
+
+```{r}
+library(lme4)
+data("InstEval")
+head(InstEval)
+
+```
+```{r}
+library(lmerTest)
+```
+```{r}
+InstEval$studage <- as.numeric(InstEval$studage)
+InstEval$lectage <- as.numeric(InstEval$lectage)
+InstEval$service <- as.numeric(InstEval$service) 
+InstEval$dept <- as.numeric(InstEval$dept)
+```
+
+
+
+
+
+```{r}
+m1 <- lmer( formula = y ~ studage + lectage + service + dept + (1|s) + (1|d),  
+                     data = InstEval )
+summary( m1 )
+```
+
+```{r}
+library(lme4)
+data("sleepstudy")
+head(sleepstudy)
+
+```
+
+```{r}
+library(tidyverse)
+library(magrittr)
+```
+
+
+```{r}
+dep_1 <- sleepstudy %>% filter(Days == 1) %>% select(Reaction)
+dep_2 <- sleepstudy %>% filter(Days == 2) %>% select(Reaction)
+dep_3 <- sleepstudy %>% filter(Days == 3) %>% select(Reaction)
+dep_4 <- sleepstudy %>% filter(Days == 4) %>% select(Reaction)
+dep_5 <- sleepstudy %>% filter(Days == 5) %>% select(Reaction)
+dep_6 <- sleepstudy %>% filter(Days == 6) %>% select(Reaction)
+dep_7 <- sleepstudy %>% filter(Days == 7) %>% select(Reaction)
+dep_8 <- sleepstudy %>% filter(Days == 8) %>% select(Reaction)
+dep_9 <- sleepstudy %>% filter(Days == 9) %>% select(Reaction)
+df <- data.frame(dep_1,dep_2, dep_3, dep_4, dep_5, dep_6, dep_7, dep_8, dep_9)
+```
+
+```{r}
+df2 <- sleepstudy %>% filter(Days %in% c(1, 5))
+```
+
+
+```{r}
+diff <- df$Reaction.5 - df$Reaction
+shapiro.test(diff)
+```
+```{r}
+df2$Days <- as.factor(df2$Days)
+leveneTest(Reaction ~ Days, df2)
+```
+
+
+```{r}
+t.test(df$Reaction, df$Reaction.5, paired = TRUE, alternative = "two.sided", var.equal = TRUE)
+```
+
+```{r}
+m2 <- lmer( formula = Reaction ~ Days + (1|Subject),  
+                     data = sleepstudy )
+summary( m2 )
+```
+
+```{r}
+m3 <- lmer( formula = Reaction ~ Days + (1 + Days|Subject),  
+                     data = sleepstudy )
+summary( m3 )
+```
+```{r}
+AIC(m2, m3)
+```
+
+```{r}
+anova(m2,m3)
+```
+
+
+
+
+```{r}
+library(easystats)
+
+```
+
+
+```{r}
+check_model(m2)
+```
+
+```{r}
+check_heteroscedasticity(m3)
+```
+
+```{r}
+library(MASS)
+data("HairEyeColor")
+head(HairEyeColor)
+```
+```{r}
+tab_n <- c(124,151,105,149)
+```
+
+```{r}
+library(lsr)
+cramersV( tab_n )
+```
+
+
+```{r}
+chisq.test( tab_n  )
+
+```
+```{r}
+library(pwr)
+pwr.chisq.test(w = 0.08, df = 3, sig.level = 0.05, power = 0.8 )
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+data("mtcars")
+head(mtcars)
+```
+
+```{r}
+m2 <- lm( formula = mpg ~ hp + wt,  
+                     data = mtcars )
+summary( m2 )
+```
+```{r}
+library(car)
+```
+```{r}
+plot(x = m1, which = 3)
+
+```
+
+```{r}
+ncvTest( m1 )
+```
+
+
+```{r}
+vif( mod = m1 )
+```
+```{r}
+residualPlots( model = m1 ) 
+```
+```{r}
+plot( x = m2, which = 2) 
+
+```
+```{r}
+shapiro.test(residuals( m1 ))
+```
+
+
+
+
+
+```{r}
+
+m3 <- lm( formula = log(mpg) ~ log(hp) + log(wt),  
+                     data = mtcars )
+summary( m3 )
+```
+```{r}
+residualPlots( model = m3 ) 
+```
+```{r}
+ncvTest( m3 )
+```
+
+
+```{r}
+vif( mod = m3 )
+```
+
+```{r}
+library(MASS)
+```
+
+
+```{r}
+#bc <- boxcox(m3)
+bc.car <- powerTransform(m2)
+lambda <- bc.car$lambda
+
+#lambda <- bc$x[which.max(bc$y)]
+#lambda
+```
+
+fit new linear regression model using the Box-Cox transformation
+
+```{r}
+m4 <- lm(((mpg^lambda-1)/lambda) ~ hp + wt,data = mtcars)
+summary(m4)
+```
+
+```{r}
+residualPlots( model = m4 ) 
+```
+
+```{r}
+ncvTest( m4 )
+```
+
+
+```{r}
+vif( mod = m4 )
+```
+
+```{r}
+plot( x = m3, which = 2) 
+
+```
+```{r}
+shapiro.test(residuals( m4 ))
+```
+
+
+```{r}
+data()
+```
+
+```{r}
+library(lme4)
+data("sleepstudy")
+head(sleepstudy)
+```
+

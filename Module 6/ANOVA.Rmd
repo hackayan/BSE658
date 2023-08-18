@@ -329,4 +329,36 @@ summary(model.3)
 etaSquared( model.3 )
 ```
 
+```{r}
+data(ToothGrowth)
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+head(ToothGrowth)
+```
+
+
+
+```{r}
+model.3a <- aov( len ~ supp + dose + supp:dose, ToothGrowth )  
+summary(model.3a)
+```
+
+```{r}
+TukeyHSD( model.3a )
+```
+
+```{r}
+etaSquared( model.3a )
+```
+
+```{r}
+my.anova.residuals <- residuals( object = model.3a )   # extract the residuals
+hist( x = my.anova.residuals )           # plot a histogram (similar to Figure @ref{fig:normalityanova}a)
+qqnorm( y = my.anova.residuals )         # draw a QQ plot (similar to Figure @ref{fig:normalityanova}b)
+shapiro.test( x = my.anova.residuals )   # run Shapiro-Wilk test
+```
+```{r}
+library(car)
+leveneTest(y = len ~ dose, data = ToothGrowth)   # y is a formula in this case
+```
+
 

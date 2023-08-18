@@ -121,7 +121,6 @@ head(data)
 Convert attitude, gender, subject into factors.
 ```{r}
 data = data %>% mutate(attitude=as.factor(attitude), gender=as.factor(gender), subject=as.factor(subject))
-
 ```
 
 
