@@ -107,8 +107,10 @@ Some basic terminology - We’ll let `N` denote the number of dice rolls in our 
 Let's generate a binomial distribution in R:
 
 ```{r}
-dbinom( x = 1, size = 20, prob = 1/6)
+dbinom( x = 4, size = 10, prob = 1/2)
 ```
+
+
 The above command calculates the probability of getting x = 4 skulls, from an experiment of size = 20 trials, in which the probability of getting a skull on any one trial is prob = 1/6.
 
 What if the dice is replaced by a coin in the above example? How will the probability change? 
@@ -122,7 +124,7 @@ If we want to find the probability of obtaining an outcome smaller than or equal
 
 ```{r}
 #Find the probability of rolling 0 skulls or 1 skull or 2 skulls or 3 skulls or 4 skulls
-pbinom( q= 3, size = 20, prob = 1/6)
+pbinom( q= 4, size = 10, prob = 1/2)
 
 #Practice - Find probability of getting 0-5 heads in 50 trials of coin flip
 ```
@@ -131,7 +133,7 @@ In other words, value of 4 is actually the 76.9th percentile of this binomial di
 Now let’s say we want to calculate the 75th percentile of the binomial distribution.
 
 ```{r}
-qbinom( p = 0.566, size = 20, prob = 1/6 )
+qbinom( p = 0.376, size = 10, prob = 1/2 )
 
 #Practice - Find the 40th percentile
 ```
@@ -139,9 +141,9 @@ qbinom( p = 0.566, size = 20, prob = 1/6 )
 We've found different quantities. What if we want to simulate the above experiments. We specify how many times R should “simulate” the experiment using the n argument, and it will generate random outcomes from the binomial distribution using the `rbinom` function.
 
 ```{r}
-z <- rbinom( n = 1000000, size = 100, prob = 1/2 )
+z <- rbinom( n = 10000, size = 10, prob = 1/2 )
 #Let's also plot this and see how it looks
-hist(z, breaks=15, col = 'steelblue')
+hist(z, breaks=25, col = 'steelblue')
 ```
 #Try plotting the distributions in above examples and vary the size, trial number and probability to generate different plots.
 ```{r}
@@ -165,7 +167,7 @@ qbinom(p = 0.025, size = 10, prob = 1/2)
 ```
 
 ```{r}
-binom.test( x=62, n=100, p=.5 )
+binom.test( x=6, n=10, p=1/2 )
 ```
 
 
@@ -232,7 +234,7 @@ Basically, whenever you have accumulation of data at the center, fewer extreme v
 
 mean = 0; sd = 1 -> standard normal distribution
 ```{r}
-normal_distribution <- rnorm(10000, mean = 10, sd = 5) 
+normal_distribution <- rnorm(10000, mean = 165, sd = 20) 
 histogram_normal_distribution <- hist(normal_distribution)
 plot(histogram_normal_distribution$mids,histogram_normal_distribution$density, type="l", col="blue", lwd=1)
 
@@ -243,32 +245,41 @@ Note: Normal distribution is sometimes referred to as the bell curve or Gaussian
 
 The notation for a normal distribution is: X ∼ Normal(μ,σ) 
 
+```{r}
+no_test <- rnorm(10000, mean = 165, sd = 20)
+
+```
+
+
 
 dnorm tells you the probability of getting a particular outcome
 ```{r}
-dnorm(x=10, mean=10, sd=5)
+dnorm(x=165, mean=165, sd=20)
 
 ```
 Cumulative normal distribution
 ```{r}
-pnorm(q = 19.8, mean = 10, sd = 5)
+pnorm(q = 175, mean = 165, sd = 20)
 ```
 
 ```{r}
-qnorm(0.25 ,mean = 0 , sd = 1)
+qnorm(0.75 ,mean = 165 , sd = 20)
 ```
 
 *Checking for normality using the Shapiro-Wilk Test*
 ```{r}
-norm <- rnorm(50, mean = 0, sd = 1) 
+norm <- rnorm(1000, mean = 0, sd = 1) 
 shapiro.test(norm)
 
-binom <- rbinom(100, 20, 1/6)
-shapiro.test(binom)
+
 
 ```
 
 
+```{r}
+binom <- rbinom(100, 10, 1/2)
+shapiro.test(binom)
+```
 
 
 

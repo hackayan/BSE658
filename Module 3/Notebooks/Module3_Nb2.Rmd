@@ -189,6 +189,8 @@ Now let's check out how to code this using cor().
 cor(x = parenthood$dan.sleep, y = parenthood$dan.grump)
 
 #Try giving the entire dataframe 'parenthood' as input in cor()
+#Pearson's
+#Spearman's: sleep = [1, 4, 3, 2]; grump = [rank order]
 ```
 
 What did you find?
@@ -290,7 +292,7 @@ grade.rank <- rank( effort$grade )   # rank students by grade received
 cor( hours.rank, grade.rank )
 ```
 
-Now the correlation coefficient we get is different from the Perason's correlation coefficient _r_ we got earlier. This new correlation coefficient that we got is called '**Spearman's Correlation Coefficient**', denoted by $\rho$.
+Now the correlation coefficient we get is different from the Pearson's correlation coefficient _r_ we got earlier. This new correlation coefficient that we got is called '**Spearman's Correlation Coefficient**', denoted by $\rho$.
 
 ```{r}
 #Execute this and compare with the correlation coefficient we got above
@@ -323,6 +325,22 @@ We've seen in earlier lectures that there could be missing values in data which 
 But what if we have missing values in a dataframe where we have to find correlations across variables.
 
 Let's look at such a dataset.
+
+```{r}
+partial <- c(10, 20, NA, 30)
+
+```
+
+```{r}
+median(partial, na.rm = TRUE)
+```
+```{r}
+sleep <- c(NA, 9,10)
+grump <- c(70, NA, 30)
+```
+
+
+
 
 ```{r}
 load( "parenthood2.Rdata" )
