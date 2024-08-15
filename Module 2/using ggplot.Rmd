@@ -88,10 +88,26 @@ ggplot(data = state_data, mapping = aes(x=Positive)) + geom_histogram(bins = 5, 
 colors()
 ```
 
+## Boxplots!!
+```{r}
+ggplot(data = state_data, mapping = aes(x=Positive)) + geom_boxplot()
+
+```
+```{r}
+manystates_data = filter(covid_data, State == c('Delhi','Karnataka','Tamil Nadu','Uttar Pradesh'))
+ggplot(data = manystates_data, mapping = aes(x = factor(State), y = Negative)) + geom_boxplot()
+```
+
+## Barplots!!
+```{r}
+ggplot(data = manystates_data, mapping = aes(x=State, y=Positive)) + geom_col()
+
+```
+
 ## Facets!
 ### Split the data by States!
 ```{r}
-ggplot(data = covid_data, mapping = aes(x=Negative)) + geom_histogram(bins = 10, color = "white", fill = "steelblue") + facet_wrap(~State, nrow = 6)
+ggplot(data = manystates_data, mapping = aes(x=Negative)) + geom_histogram(bins = 10, color = "white", fill = "steelblue") + facet_wrap(~State, nrow = 2)
 
 ```
 
@@ -99,12 +115,8 @@ ggplot(data = covid_data, mapping = aes(x=Negative)) + geom_histogram(bins = 10,
 
 ### Saving a plot
 ```{r}
-ggsave('Delhi.png', width = 8, height = 6)
+ggsave('4 states.png', width = 8, height = 6)
 ```
-
-
-
-
 
 
 
