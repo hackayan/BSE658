@@ -21,6 +21,14 @@ newdata
 ![](./t_test.png) 
 
 #### Graphical illustration of the null and alternative hypotheses assumed by the (two sided) one sample t-test.
+
+
+```{r}
+summary(newdata)
+```
+
+
+
 Unlike z-test, for t-test we assume that the population standard deviation is not known in advance.
 For our t-test, we will use the population mean for weightloss, and will estimate the standard error of mean using the standard deviation of the sample.
 ```{r}
@@ -52,7 +60,7 @@ What can we infer here is, the group with diet 3 has a significantly higher weig
 Now, lets perform the two sampled t-test with the same hypothesis as used for z-test
 ```{r}
 sample2 <- select(newdata, Diet,weightdiff) 
-sample2 <- filter(sample2, Diet==1 | Diet==2)
+sample2 <- filter(sample2, Diet==1 | Diet==3)
 sample2 <- as.data.frame(sample2) #the lsr function for independent t-test takes dataframes
 sample2
 ```
