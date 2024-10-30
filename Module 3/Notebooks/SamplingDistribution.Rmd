@@ -47,12 +47,13 @@ How can we directly test this?
 *Binomial Test in R*
 
 ```{r}
-binom.test( x=62, n=100, p=.5 )
+binom.test( x=62, n=1000, p=.5 )
 
 
 
 ```
-
+set p alpha as 0.05 and p value is .02 less than alpha value .so reject the null hypothesis...
+p is based on data and alpha is set by me before the analysis.
 *Power Analysis in R*
 
 

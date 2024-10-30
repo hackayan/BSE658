@@ -45,6 +45,34 @@ Let's take a look at afl.margins variable.
 
 ```{r}
 print(afl.margins)
+library(psych)
+describe(afl.margins)
+```
+
+```{r}
+sum(afl.margins)/length(afl.margins)
+```
+
+
+```{r}
+sort(afl.margins)
+
+median(afl.margins)
+```
+```{r}
+min(afl.margins)
+max(afl.margins)
+range(afl.margins)
+
+```
+
+
+```{r}
+```
+
+
+```{r}
+mean(afl.margins)
 ```
 
 This output doesn’t make it easy to get a sense of what the data is actually saying. Just “looking at the data” isn’t a terribly effective way of understanding data.
@@ -171,8 +199,8 @@ Say, you want to bet your money on the outcome of a match. You may want to find 
 ```{r}
 #afl.mode = 
 #afl.mode
-modeOf(afl.margins)
-maxFreq(afl.margins)
+mode(afl.margins)
+#maxFreq(afl.margins)
 ```
 
 So far we've just seen the central measures of tendency, but we saw in the beginning that individual variability is quite important in biology. So, let's take a look at some of the measures of variability.
@@ -230,11 +258,19 @@ IQR can simply be thought as the range spanned by the “middle half” of the d
 
 
 ```{r}
-quantile( x = afl.margins, probs = c(.25,.75) )
+x=quantile( x = afl.margins, probs = c(.25,.75) )
 # try using IQR() here
 
 ```
+```{r}
+x
+```
 
+```{r}
+x[3]=x[2]-x[1]
+x
+IQR(afl.margins)
+```
 
 **Variance**
 
@@ -242,6 +278,16 @@ In order to find out the variance of data from the mean or median, we need to fi
 
 
 Try finding out the variance using `var()`.
+```{r}
+x=(afl.margins-mean(afl.margins))**2
+#x
+sum(x)/(length(x))
+```
+```{r}
+a=2
+a**2
+```
+
 
 ```{r}
 #Use var() for finding variance of afl.margins
@@ -363,7 +409,7 @@ load("clinicaltrial.Rdata")
 ```
 
 ```{r}
-summary(clin.trial)
+summary(object = clin.trial)
 ```
 
 The `psych` package also has a function called `describe()` for dataframes. Don't forget to check it out too!
@@ -371,6 +417,9 @@ The `psych` package also has a function called `describe()` for dataframes. Don'
 In fact, you can also describe these statistics group wise. 
 
 For instance, run `describeBy( x=clin.trial, group=clin.trial$therapy )`
+```{r}
+describe(clin.trial)
+```
 
 ```{r}
 describeBy( x=clin.trial, group=clin.trial$therapy )

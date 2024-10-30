@@ -14,6 +14,9 @@ If you need to use a package, you need to first download it using `install.packa
 *Q1. How would you install a package from a GitHub repository?*
 
 ### Handling data using base R functions
+```{r}
+library(tidyverse)
+```
 
 ```{r}
 # Importing covid testing data 
@@ -29,6 +32,9 @@ head(covid_testdata)
 # Using nrow()  and ncol() base R functions to view the number of rows and columns for the data
 nrow(covid_testdata)
 ncol(covid_testdata)
+#as.numeric(covid_testdata$TotalSamples)
+
+covid_testdata[c("State")]
 ```
 
 *Q2. How would you check the number of `NA` rows in the `Negative` column?*
