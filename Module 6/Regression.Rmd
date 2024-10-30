@@ -202,4 +202,20 @@ anova( M0, M1 )
 ```
 
 
+Using the performance package from easystats for model checking
+
+```{r}
+library(easystats)
+```
+
+```{r}
+model_performance(M1)
+```
+
+
+```{r}
+# checking model assumptions
+check_model(M1)
+```
+
 
