@@ -97,6 +97,10 @@ ckd <- cooks.distance( model = regression.2 )
 ckd
 ```
 
+
+
+
+
 Directly plotting Cook's distance using plot from car package
 ```{r}
 plot(regression.2,which=4)
@@ -130,6 +134,17 @@ Directly make the QQ plot of residuals
 plot( x = regression.2, which = 2 )
 ```
 
+Normality Test
+```{r}
+shapiro.test(residuals(regression.2))
+```
+
+
+
+
+
+
+
 Checking linearity of relationship
 ```{r}
 yhat.2 <- fitted.values( object = regression.2 )
@@ -148,10 +163,17 @@ plot(x = regression.2, which = 1)
 ```
 
 
+Linearity test
+
 ```{r}
+library(car)
 library(carData)
+```
+
+```{r}
 residualPlots( model = regression.2 ) 
 ```
+
 
 If the curvature is significant, then you might want to transform the predictor using Box Cox Transformation. Or use the powerTransform() in the car package.
 
