@@ -37,6 +37,12 @@ summary(regression.1)
 cor.test( x = parenthood$dan.sleep, y = parenthood$dan.grump )
 ```
 
+```{r}
+R <-0.903^2
+R
+```
+
+
 
 ## Multiple linear regression
 dan.grump ~ dan.sleep + baby.sleep (Is Dan's sleep and the baby's sleep both together leading to grumpiness the next day?)
@@ -49,6 +55,8 @@ print( regression.2 )
 ```{r}
 summary(regression.2)
 ```
+
+
 
 ```{r}
 library(lsr)
@@ -141,6 +149,7 @@ plot(x = regression.2, which = 1)
 
 
 ```{r}
+library(carData)
 residualPlots( model = regression.2 ) 
 ```
 
@@ -164,7 +173,7 @@ vif( mod = regression.2 )
 ```
 
 
-
+MODEL SELECTION
 
 Backward elimination
 
@@ -202,6 +211,32 @@ anova( M0, M1 )
 ```
 
 
+Using predict() function to interpret the model
+```{r}
+regression.1 <- lm( formula = dan.grump ~ dan.sleep,  
+                    data = parenthood )
+```
+
+
+
+```{r}
+xvals <- seq(from = 0, to = 10, by = 1)
+mypreds <- tibble(dan.sleep = xvals)
+```
+
+
+```{r}
+mypreds$fit <- predict(regression.1, newdata = mypreds)
+mypreds
+```
+
+
+
+
+
+
+
+
 Using the performance package from easystats for model checking
 
 ```{r}
@@ -211,6 +246,8 @@ library(easystats)
 ```{r}
 model_performance(M1)
 ```
+
+
 
 
 ```{r}
