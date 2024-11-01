@@ -135,6 +135,8 @@ plot( x = regression.2, which = 2 )
 ```
 
 Normality Test
+Null hypothesis - it is Normal
+Alternate hypthosis - it is not Normal
 ```{r}
 shapiro.test(residuals(regression.2))
 ```
@@ -188,6 +190,7 @@ ncvTest( regression.2 )
 
 ```
 
+
 Lastly, we assess the variance inflation factor -- to diagnose for collinearity
 
 ```{r}
@@ -200,7 +203,7 @@ MODEL SELECTION
 Backward elimination
 
 ```{r}
-full.model <- lm( formula = dan.grump ~ dan.sleep + baby.sleep + day,  
+full.model <- lm( formula = dan.grump ~  dan.sleep + baby.sleep + day,  
                    data = parenthood  
  )
 ```
