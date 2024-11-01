@@ -44,6 +44,14 @@ If you are interested in choosing the right colors for your plots, then here's a
 https://ggplot2-book.org/scales-colour
 
 
+Coding the variables
+Referred to as Dummy Coding or Treatment Coding
+Smell - 0
+Taste - 1
+
+
+
+
 ```{r}
 chem_mdl <- lm(Val ~ DominantModality, data = chem)
 summary(chem_mdl)
