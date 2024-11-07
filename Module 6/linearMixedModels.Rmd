@@ -4,16 +4,23 @@ output: html_notebook
 ---
 
 Linear Mixed Models
-Adapted from: https://chenzixu.rbind.io/slides/lme/lmer.html
-
 
 ```{r}
-library(lme4)
 library(magrittr)
 library(tidyverse)
 library(ggplot2)
+```
+
+For linear mixed models, load these libraries
+```{r}
+library(lme4)
 library(lmerTest)
 ```
+
+A great visualization for mixed models:
+http://mfviz.com/hierarchical-models/
+
+
 
 ```{r}
 data("sleepstudy")
@@ -108,6 +115,13 @@ ggplot(sleep2, aes(x = days_deprived, y = Reaction)) +
 ```
 
 ##Research Question
+
+Experimenting with Linear Mixed Models
+
+Reading: https://bodowinter.com/tutorial/bw_LME_tutorial2.pdf
+PPT tutorial: https://chenzixu.rbind.io/slides/lme/lmer.html
+
+In this example: 
 We're interested in the relationship between pitch and politeness (Winter & Grawunder, 2012).
 
 Politeness: formal/polite and informal register (categorical factor)
@@ -124,30 +138,89 @@ data = data %>% mutate(attitude=as.factor(attitude), gender=as.factor(gender), s
 ```
 
 
-Random Intercept Models
+```{r}
+boxplot(frequency ~ attitude*gender,
+col=c("white","lightgray"),data)
+```
+
+
 
 ```{r}
-politeness.model0 = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data)
+politeness.model0 = lmer(frequency ~ 1 + (1|subject) + (1|scenario), data=data)
 summary(politeness.model0)
+
+```
+
+
+
+
+Random Intercept Models with Attitude as fixed effect
+
+```{r}
+politeness.model1 = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data)
+summary(politeness.model1)
 ```
 
 ```{r}
-politeness.model = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data)
-summary(politeness.model)
+politeness.model2 = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data)
+summary(politeness.model2)
 ```
+```{r}
+AIC(politeness.model0, politeness.model1, politeness.model2)
+```
+
+
+
+
+
 Likelihood Ratio Test
 
 ```{r}
-politeness.null = lmer(frequency ~ gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
+politeness.null = lmer(frequency ~ 1 + (1|subject) + (1|scenario), data=data, REML=FALSE)
+politeness.partial = lmer(frequency ~ attitude + (1|subject) + (1|scenario), data=data, REML=FALSE)
 politeness.full = lmer(frequency ~ attitude + gender + (1|subject) + (1|scenario), data=data, REML=FALSE)
-anova(politeness.null, politeness.full)
+anova(politeness.null, politeness.partial, politeness.full)
 ```
 
 Random Slope Model
 
 ```{r}
-politeness.model1 = lmer(frequency~attitude + gender + (1+attitude|subject) + (1+attitude|scenario), data = data)
-coef(politeness.model1)
+politeness.model3 = lmer(frequency~attitude + gender + (1|subject) + (1+attitude|scenario), data = data, REML=FALSE)
+summary(politeness.model3)
 ```
+```{r}
+anova(politeness.null, politeness.partial, politeness.full, politeness.model3)
+
+```
+```{r}
+AIC(politeness.null, politeness.partial, politeness.full, politeness.model3)
+
+```
+
+Testing Assumptions: 
+
+
+```{r}
+library(easystats)
+```
+
+```{r}
+check_normality(politeness.full)
+```
+```{r}
+check_heteroscedasticity(politeness.full)
+```
+
+```{r}
+check_collinearity(politeness.full)
+```
+
+
+
+
+```{r}
+check_model(politeness.full)
+```
+
 
 
