@@ -37,6 +37,12 @@ summary(regression.1)
 cor.test( x = parenthood$dan.sleep, y = parenthood$dan.grump )
 ```
 
+```{r}
+R <-0.903^2
+R
+```
+
+
 
 ## Multiple linear regression
 dan.grump ~ dan.sleep + baby.sleep (Is Dan's sleep and the baby's sleep both together leading to grumpiness the next day?)
@@ -49,6 +55,8 @@ print( regression.2 )
 ```{r}
 summary(regression.2)
 ```
+
+
 
 ```{r}
 library(lsr)
@@ -89,6 +97,10 @@ ckd <- cooks.distance( model = regression.2 )
 ckd
 ```
 
+
+
+
+
 Directly plotting Cook's distance using plot from car package
 ```{r}
 plot(regression.2,which=4)
@@ -122,6 +134,19 @@ Directly make the QQ plot of residuals
 plot( x = regression.2, which = 2 )
 ```
 
+Normality Test
+Null hypothesis - it is Normal
+Alternate hypthosis - it is not Normal
+```{r}
+shapiro.test(residuals(regression.2))
+```
+
+
+
+
+
+
+
 Checking linearity of relationship
 ```{r}
 yhat.2 <- fitted.values( object = regression.2 )
@@ -140,9 +165,17 @@ plot(x = regression.2, which = 1)
 ```
 
 
+Linearity test
+
+```{r}
+library(car)
+library(carData)
+```
+
 ```{r}
 residualPlots( model = regression.2 ) 
 ```
+
 
 If the curvature is significant, then you might want to transform the predictor using Box Cox Transformation. Or use the powerTransform() in the car package.
 
@@ -157,6 +190,7 @@ ncvTest( regression.2 )
 
 ```
 
+
 Lastly, we assess the variance inflation factor -- to diagnose for collinearity
 
 ```{r}
@@ -164,12 +198,12 @@ vif( mod = regression.2 )
 ```
 
 
-
+MODEL SELECTION
 
 Backward elimination
 
 ```{r}
-full.model <- lm( formula = dan.grump ~ dan.sleep + baby.sleep + day,  
+full.model <- lm( formula = dan.grump ~  dan.sleep + baby.sleep + day,  
                    data = parenthood  
  )
 ```
@@ -201,5 +235,49 @@ AIC( M0, M1 )
 anova( M0, M1 )
 ```
 
+
+Using predict() function to interpret the model
+```{r}
+regression.1 <- lm( formula = dan.grump ~ dan.sleep,  
+                    data = parenthood )
+```
+
+
+
+```{r}
+xvals <- seq(from = 0, to = 10, by = 1)
+mypreds <- tibble(dan.sleep = xvals)
+```
+
+
+```{r}
+mypreds$fit <- predict(regression.1, newdata = mypreds)
+mypreds
+```
+
+
+
+
+
+
+
+
+Using the performance package from easystats for model checking
+
+```{r}
+library(easystats)
+```
+
+```{r}
+model_performance(M1)
+```
+
+
+
+
+```{r}
+# checking model assumptions
+check_model(M1)
+```
 
 
